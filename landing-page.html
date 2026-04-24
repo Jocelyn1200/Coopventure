@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Coop Venture | Career Prep Platform</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --text: #14213d;
+      --muted: #4f5d75;
+      --accent: #2f80ed;
+      --accent-soft: #eaf3ff;
+      --border: #dfe7f3;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(1000px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 64px 0 40px;
+    }
+
+    .hero {
+      background: linear-gradient(145deg, #ffffff, #f3f7ff);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 42px 30px;
+      box-shadow: 0 12px 30px rgba(20, 33, 61, 0.08);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .cta {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 10px 16px;
+      border: 1px solid transparent;
+    }
+
+    .cta.primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .cta.secondary {
+      color: var(--text);
+      background: #fff;
+      border-color: var(--border);
+    }
+
+    section {
+      padding: 8px 0 26px;
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      margin: 0 0 12px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .stat {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 0 6px;
+      color: var(--accent);
+    }
+
+    .label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .bullets {
+      padding-left: 18px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .bullets li { margin-bottom: 8px; }
+
+    footer {
+      padding: 22px 0 44px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="hero">
+        <span class="eyebrow">The Coop Venture</span>
+        <h1>A smarter path from school to career</h1>
+        <p>
+          We are building an AI-powered career preparation platform to help students become
+          industry-ready before they apply. Instead of generic advice, we focus on role-specific
+          training, interview readiness, and better job matching.
+        </p>
+        <p>
+          Our direction is based on direct student feedback from our survey and our mission to close
+          the gap between what universities teach and what employers expect.
+        </p>
+        <div class="cta-row">
+          <a class="cta primary" href="#survey-findings">See survey findings</a>
+          <a class="cta secondary" href="#focus">What we are building</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="survey-findings">
+      <h2>What students told us</h2>
+      <p class="section-intro">
+        From 23 survey responses, students consistently shared that current job platforms are not
+        enough. They want clearer guidance, better matching, and less frustrating applications.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <p class="stat">~65%</p>
+          <p class="label">struggle with "not enough experience"</p>
+        </article>
+        <article class="card">
+          <p class="stat">~50%</p>
+          <p class="label">struggle with finding relevant roles</p>
+        </article>
+        <article class="card">
+          <p class="stat">~35%</p>
+          <p class="label">struggle with long applications</p>
+        </article>
+        <article class="card">
+          <p class="stat">~80%</p>
+          <p class="label">have stopped an application halfway</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="focus">
+      <h2>What we are focusing on first</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>1) Better job matching</h3>
+          <ul class="bullets">
+            <li>Match students to roles based on skills and goals.</li>
+            <li>Improve role relevance and filter quality.</li>
+            <li>Reduce wasted time on poor-fit applications.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>2) Resume + application support</h3>
+          <ul class="bullets">
+            <li>Actionable resume feedback before applying.</li>
+            <li>Guidance aligned to real job requirements.</li>
+            <li>Simpler process for repetitive applications.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>3) Career readiness training</h3>
+          <ul class="bullets">
+            <li>Technical training (modeling, Excel, role skills).</li>
+            <li>AI mock interviews with performance feedback.</li>
+            <li>Preparation built around real job descriptions.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Who this is for</h2>
+      <div class="card">
+        <ul class="bullets">
+          <li><strong>Primary:</strong> Undergraduate students in NYC, including international students.</li>
+          <li><strong>Partners:</strong> Universities looking to improve placement outcomes.</li>
+          <li><strong>Employers:</strong> Companies that want better-prepared entry-level candidates.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    Early-stage product preview. We are currently validating features through student feedback and partner conversations.
+  </footer>
+</body>
+</html>
