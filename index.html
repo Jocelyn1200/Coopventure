@@ -1,0 +1,1759 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Coop Venture | Career Prep Platform</title>
+  <style>
+    :root {
+      --bg: #faf7ff;
+      --card: #ffffff;
+      --text: #24163f;
+      --muted: #5f4b86;
+      --accent: #7c3aed;
+      --accent-soft: #efe7ff;
+      --border: #dccbff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(1000px, 92%);
+      margin: 0 auto;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(250, 247, 255, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .top-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nyu-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: #5b21b6;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+      border: 1px solid #4c1d95;
+      box-shadow: 0 6px 14px rgba(91, 33, 182, 0.25);
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      background: #f2eaff;
+    }
+
+    .nav-links a:hover {
+      background: #eadfff;
+    }
+
+    .nav-links a.active-tab {
+      background: #7c3aed;
+      color: #fff;
+      border-color: #7c3aed;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: tabFade 0.25s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes tabFade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      padding: 64px 0 40px;
+    }
+
+    .hero {
+      background: linear-gradient(145deg, #ffffff, #efe7ff);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 42px 30px;
+      box-shadow: 0 14px 32px rgba(97, 51, 177, 0.14);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .cta {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 10px 16px;
+      border: 1px solid transparent;
+    }
+
+    .cta.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: #6d28d9;
+    }
+
+    .cta.secondary {
+      color: var(--text);
+      background: #f7f2ff;
+      border-color: var(--border);
+    }
+
+    section {
+      padding: 8px 0 26px;
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      margin: 0 0 12px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 6px 20px rgba(116, 68, 196, 0.08);
+    }
+
+    .stat {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 0 6px;
+      color: var(--accent);
+    }
+
+    .label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .bullets {
+      padding-left: 18px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .bullets li { margin-bottom: 8px; }
+
+    .section-form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .section-form input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+    }
+
+    .section-form input:focus {
+      outline: 2px solid #cdb5ff;
+      outline-offset: 1px;
+    }
+
+    .section-form button {
+      width: fit-content;
+      cursor: pointer;
+    }
+
+    .signup-section h2 {
+      font-size: 2rem;
+      color: #6d28d9;
+    }
+
+    .signup-section .section-intro {
+      font-size: 1.08rem;
+      color: #7c3aed;
+      font-weight: 600;
+    }
+
+    .signup-section .section-form input {
+      font-size: 1.02rem;
+    }
+
+    .mock-test-shell {
+      background: #f4eeff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12);
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .role-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .role-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(124, 58, 237, 0.16);
+    }
+
+    .role-card.active {
+      border-color: #7c3aed;
+      background: #f4ebff;
+    }
+
+    .question-title {
+      margin-top: 4px;
+      margin-bottom: 10px;
+      font-size: 1.02rem;
+      color: var(--text);
+    }
+
+    .option-list {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0 14px;
+    }
+
+    .option-btn {
+      text-align: left;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fcfaff;
+      color: var(--text);
+      padding: 10px 12px;
+      font: inherit;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .option-btn:hover {
+      transform: translateY(-1px);
+      background: #f4ecff;
+    }
+
+    .option-btn.selected {
+      background: #7c3aed;
+      border-color: #7c3aed;
+      color: #fff;
+    }
+
+    .match-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #faf6ff;
+      padding: 14px;
+      box-shadow: 0 6px 20px rgba(116, 68, 196, 0.1);
+    }
+
+    .match-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .match-badge {
+      background: #7c3aed;
+      color: #fff;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .match-item {
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .match-label {
+      font-weight: 700;
+      color: #5b21b6;
+      margin-right: 6px;
+    }
+
+    .icon-note {
+      font-size: 0.9rem;
+      color: #6d28d9;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    .progress {
+      width: 100%;
+      background: #e9ddff;
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+      margin: 12px 0 16px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #7c3aed, #a855f7);
+      transition: width 0.35s ease;
+    }
+
+    .step-count {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .flow-view {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      min-height: 250px;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+
+    .flow-view.fade {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 10px 0 12px;
+    }
+
+    .input-grid.single {
+      grid-template-columns: 1fr;
+    }
+
+    .demo-input,
+    .demo-select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      font: inherit;
+      background: #fcfaff;
+    }
+
+    .flow-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .tag-list {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 10px 0;
+    }
+
+    .tag {
+      background: #f2e9ff;
+      color: #5b21b6;
+      border: 1px solid #d9c4ff;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .job-item,
+    .candidate-item,
+    .uni-stat {
+      border: 1px solid var(--border);
+      background: #faf6ff;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    .score {
+      font-weight: 700;
+      color: #6d28d9;
+    }
+
+    .insight-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 16px;
+      align-items: center;
+    }
+
+    .insight-label {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .insight-select {
+      border: 1px solid var(--border);
+      background: #f6f0ff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.9rem;
+      min-width: 280px;
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 14px;
+    }
+
+    .chart-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 6px 20px rgba(116, 68, 196, 0.08);
+    }
+
+    .bar-row {
+      margin: 10px 0;
+      position: relative;
+    }
+
+    .bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .bar-track {
+      height: 14px;
+      border-radius: 999px;
+      background: #efe6ff;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ff6b4a, #ff9f40);
+      transition: width 0.85s cubic-bezier(.22,.61,.36,1);
+    }
+
+    .bar-row:hover .bar-fill {
+      filter: brightness(1.04);
+    }
+
+    .pie-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      min-height: 210px;
+    }
+
+    .pie {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: conic-gradient(#d946ef 0deg, #d946ef 40deg, #8b5cf6 40deg, #8b5cf6 120deg, #7c3aed 120deg, #7c3aed 220deg, #4c1d95 220deg, #4c1d95 360deg);
+      transform: scale(0.85);
+      opacity: 0;
+      transition: transform 0.7s ease, opacity 0.7s ease;
+      border: 8px solid #f9f5ff;
+    }
+
+    .pie.ready {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .legend {
+      display: grid;
+      gap: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .stats-mini {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .metric {
+      background: #f9f5ff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #7c3aed;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .loading-dot::after {
+      content: "";
+      display: inline-block;
+      width: 1em;
+      animation: dots 1.2s steps(3, end) infinite;
+      vertical-align: bottom;
+      overflow: hidden;
+    }
+
+    @keyframes dots {
+      0% { content: ""; }
+      33% { content: "."; }
+      66% { content: ".."; }
+      100% { content: "..."; }
+    }
+
+    footer {
+      padding: 22px 0 44px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 700px) {
+      .input-grid { grid-template-columns: 1fr; }
+      .insights-grid { grid-template-columns: 1fr; }
+      .stats-mini { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="brand-wrap">
+        <span class="nyu-badge">NYU</span>
+        <div class="brand">The Coop Venture</div>
+      </div>
+      <div class="nav-links">
+        <a href="#" class="tab-link active-tab" data-tab="home">Home</a>
+        <a href="#" class="tab-link" data-tab="insights">Insights</a>
+        <a href="#" class="tab-link" data-tab="mock">Mock Test</a>
+        <a href="#" class="tab-link" data-tab="waitlist">Join Waitlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="tab-panel active" data-panel="home">
+      <div class="hero">
+        <span class="eyebrow">The Coop Venture</span>
+        <h1>A smarter path from school to career</h1>
+        <p>
+          We are building an AI-powered career preparation platform to help students become
+          industry-ready before they apply. Instead of generic advice, we focus on role-specific
+          training, interview readiness, and better job matching.
+        </p>
+        <p>
+          Our direction is based on direct student feedback from our survey and our mission to close
+          the gap between what universities teach and what employers expect.
+        </p>
+        <div class="cta-row">
+          <a class="cta primary" href="#" data-go-tab="insights">Explore insights</a>
+        </div>
+      </div>
+
+      <section id="home-focus" style="padding-top: 24px;">
+        <h2>What we are focusing on first</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>1) Better job matching</h3>
+            <ul class="bullets">
+              <li>Match students to roles based on skills and goals.</li>
+              <li>Improve role relevance and filter quality.</li>
+              <li>Reduce wasted time on poor-fit applications.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>2) Resume + application support</h3>
+            <ul class="bullets">
+              <li>Actionable resume feedback before applying.</li>
+              <li>Guidance aligned to real job requirements.</li>
+              <li>Simpler process for repetitive applications.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>3) Career readiness training</h3>
+            <ul class="bullets">
+              <li>Technical training (modeling, Excel, role skills).</li>
+              <li>AI mock interviews with performance feedback.</li>
+              <li>Preparation built around real job descriptions.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="home-about" style="padding-top: 24px;">
+        <h2>Who this is for</h2>
+        <div class="card">
+          <ul class="bullets">
+            <li><strong>Primary:</strong> Undergraduate students in NYC, including international students.</li>
+            <li><strong>Partners:</strong> Universities looking to improve placement outcomes.</li>
+            <li><strong>Employers:</strong> Companies that want better-prepared entry-level candidates.</li>
+          </ul>
+        </div>
+        <h2 style="margin-top: 18px;">About us</h2>
+        <div class="card">
+          <p>
+            The Coop Venture is an early-stage AI-powered career platform focused on helping students
+            apply to internships and jobs more strategically. We are designing the product around real
+            student feedback to reduce confusion, improve confidence, and make the process faster.
+          </p>
+        </div>
+      </section>
+    </section>
+
+    <section id="insights" class="tab-panel" data-panel="insights">
+      <h2>Insights</h2>
+      <div class="insight-controls">
+        <label class="insight-label" for="major-filter">View by Major</label>
+        <select id="major-filter" class="insight-select">
+          <option value="all">All Majors</option>
+          <option value="btm">BTM / Business and Technology Management</option>
+          <option value="cbe">CBE</option>
+          <option value="cs">Computer Science</option>
+          <option value="civil">Civil Engineering</option>
+          <option value="mot">Management of Technology</option>
+          <option value="ee">Electrical Engineering</option>
+          <option value="sw">Social Work</option>
+          <option value="math">Mathematics</option>
+          <option value="bf">Business Finance</option>
+          <option value="geo">Geoscience</option>
+          <option value="me">Mechanical Engineering</option>
+          <option value="phi">Public Health &amp; Integrative Biology</option>
+        </select>
+      </div>
+
+      <div class="insights-grid">
+        <div class="chart-card">
+          <h3>Top Struggles</h3>
+          <div id="bars-wrap"></div>
+        </div>
+        <div class="chart-card">
+          <h3>Applications Per Week</h3>
+          <div class="pie-wrap">
+            <div class="pie" id="pie-chart" aria-label="Applications per week pie chart"></div>
+            <div class="legend" id="pie-legend"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-mini">
+        <div class="metric">
+          <div class="metric-value" id="counter-stop">0%</div>
+          <div class="metric-label">Stopped applications halfway</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value" id="counter-confidence">0.0</div>
+          <div class="metric-label">Average confidence level</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value" id="counter-feature">--</div>
+          <div class="metric-label">Most requested feature</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mock-test" class="tab-panel" data-panel="mock">
+      <h2>Mock Test</h2>
+      <p class="section-intro">
+        Try an interactive demo flow by selecting your role.
+      </p>
+      <div class="mock-test-shell">
+        <div class="role-grid">
+          <div class="role-card active" data-role="student">
+            <h3>Student</h3>
+            <p class="label">5-step flow: sign up to AI recommendations.</p>
+          </div>
+          <div class="role-card" data-role="company">
+            <h3>Company</h3>
+            <p class="label">5-step hiring questionnaire with tailored summary.</p>
+          </div>
+          <div class="role-card" data-role="university">
+            <h3>University</h3>
+            <p class="label">7-step readiness questionnaire with tailored summary.</p>
+          </div>
+        </div>
+
+        <div class="step-count" id="step-count">Step 1 of 5</div>
+        <div class="progress">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="flow-view" id="flow-view"></div>
+      </div>
+    </section>
+
+    <section id="interest" class="signup-section tab-panel" data-panel="waitlist">
+      <h2>Interested? Join our waitlist</h2>
+      <div class="card">
+        <p class="section-intro">
+          Share your information and we will reach out when early access opens.
+        </p>
+        <form class="section-form" action="#" method="post">
+          <input type="text" name="fullName" placeholder="Full name" required>
+          <input type="email" name="email" placeholder="Email address" required>
+          <button class="cta primary" type="submit">Join Waitlist</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    Early-stage product preview. We are currently validating features through student feedback and partner conversations.
+  </footer>
+
+  <script>
+    const state = { role: "student", step: 0 };
+    const studentAnswers = {};
+    const companyAnswers = {};
+    const universityAnswers = {};
+    const insightData = {
+      all: {
+        struggles: [
+          { label: "Lack of experience", value: 65 },
+          { label: "Finding relevant roles", value: 52 },
+          { label: "Long applications", value: 35 },
+          { label: "Resume issues", value: 30 }
+        ],
+        applications: [
+          { label: "0-2", value: 22, color: "#d946ef" },
+          { label: "3-5", value: 26, color: "#8b5cf6" },
+          { label: "6-10", value: 26, color: "#7c3aed" },
+          { label: "10+", value: 26, color: "#4c1d95" }
+        ],
+        stopped: 78,
+        confidence: 6.2,
+        feature: "Job matching"
+      },
+      btm: {
+        struggles: [
+          { label: "Lack of experience", value: 75 },
+          { label: "Finding relevant roles", value: 50 },
+          { label: "Long applications", value: 50 },
+          { label: "Resume issues", value: 25 }
+        ],
+        applications: [
+          { label: "0-2", value: 0, color: "#d946ef" },
+          { label: "3-5", value: 17, color: "#8b5cf6" },
+          { label: "6-10", value: 50, color: "#7c3aed" },
+          { label: "10+", value: 33, color: "#4c1d95" }
+        ],
+        stopped: 83,
+        confidence: 4.7,
+        feature: "Job matching"
+      },
+      cbe: {
+        struggles: [
+          { label: "Lack of experience", value: 80 },
+          { label: "Finding relevant roles", value: 60 },
+          { label: "Long applications", value: 0 },
+          { label: "Resume issues", value: 20 }
+        ],
+        applications: [
+          { label: "0-2", value: 40, color: "#d946ef" },
+          { label: "3-5", value: 20, color: "#8b5cf6" },
+          { label: "6-10", value: 20, color: "#7c3aed" },
+          { label: "10+", value: 20, color: "#4c1d95" }
+        ],
+        stopped: 60,
+        confidence: 4.8,
+        feature: "Job matching"
+      },
+      cs: {
+        struggles: [
+          { label: "Lack of experience", value: 50 },
+          { label: "Finding relevant roles", value: 50 },
+          { label: "Long applications", value: 50 },
+          { label: "Resume issues", value: 50 }
+        ],
+        applications: [
+          { label: "0-2", value: 0, color: "#d946ef" },
+          { label: "3-5", value: 50, color: "#8b5cf6" },
+          { label: "6-10", value: 0, color: "#7c3aed" },
+          { label: "10+", value: 50, color: "#4c1d95" }
+        ],
+        stopped: 100,
+        confidence: 7.0,
+        feature: "Resume feedback"
+      },
+      civil: {
+        struggles: [
+          { label: "Lack of experience", value: 50 },
+          { label: "Finding relevant roles", value: 50 },
+          { label: "Long applications", value: 50 },
+          { label: "Resume issues", value: 50 }
+        ],
+        applications: [
+          { label: "0-2", value: 0, color: "#d946ef" },
+          { label: "3-5", value: 50, color: "#8b5cf6" },
+          { label: "6-10", value: 50, color: "#7c3aed" },
+          { label: "10+", value: 0, color: "#4c1d95" }
+        ],
+        stopped: 100,
+        confidence: 6.5,
+        feature: "Resume feedback"
+      },
+      mot: {
+        struggles: [
+          { label: "Lack of experience", value: 100 },
+          { label: "Finding relevant roles", value: 0 },
+          { label: "Long applications", value: 50 },
+          { label: "Resume issues", value: 100 }
+        ],
+        applications: [
+          { label: "0-2", value: 0, color: "#d946ef" },
+          { label: "3-5", value: 50, color: "#8b5cf6" },
+          { label: "6-10", value: 0, color: "#7c3aed" },
+          { label: "10+", value: 50, color: "#4c1d95" }
+        ],
+        stopped: 50,
+        confidence: 8.0,
+        feature: "Career guidance"
+      },
+      ee: {
+        struggles: [
+          { label: "Lack of experience", value: 100 },
+          { label: "Finding relevant roles", value: 100 },
+          { label: "Long applications", value: 0 },
+          { label: "Resume issues", value: 0 }
+        ],
+        applications: [
+          { label: "0-2", value: 0, color: "#d946ef" },
+          { label: "3-5", value: 100, color: "#8b5cf6" },
+          { label: "6-10", value: 0, color: "#7c3aed" },
+          { label: "10+", value: 0, color: "#4c1d95" }
+        ],
+        stopped: 100,
+        confidence: 6.0,
+        feature: "Job matching"
+      },
+      sw: {
+        struggles: [
+          { label: "Lack of experience", value: 0 },
+          { label: "Finding relevant roles", value: 100 },
+          { label: "Long applications", value: 100 },
+          { label: "Resume issues", value: 100 }
+        ],
+        applications: [
+          { label: "0-2", value: 100, color: "#d946ef" },
+          { label: "3-5", value: 0, color: "#8b5cf6" },
+          { label: "6-10", value: 0, color: "#7c3aed" },
+          { label: "10+", value: 0, color: "#4c1d95" }
+        ],
+        stopped: 100,
+        confidence: 7.0,
+        feature: "Resume feedback"
+      },
+      math: {
+        struggles: [
+          { label: "Lack of experience", value: 0 },
+          { label: "Finding relevant roles", value: 100 },
+          { label: "Long applications", value: 100 },
+          { label: "Resume issues", value: 0 }
+        ],
+        applications: [
+          { label: "0-2", value: 0, color: "#d946ef" },
+          { label: "3-5", value: 100, color: "#8b5cf6" },
+          { label: "6-10", value: 0, color: "#7c3aed" },
+          { label: "10+", value: 0, color: "#4c1d95" }
+        ],
+        stopped: 100,
+        confidence: 6.0,
+        feature: "Job matching"
+      },
+      bf: {
+        struggles: [
+          { label: "Lack of experience", value: 100 },
+          { label: "Finding relevant roles", value: 0 },
+          { label: "Long applications", value: 0 },
+          { label: "Resume issues", value: 0 }
+        ],
+        applications: [
+          { label: "0-2", value: 100, color: "#d946ef" },
+          { label: "3-5", value: 0, color: "#8b5cf6" },
+          { label: "6-10", value: 0, color: "#7c3aed" },
+          { label: "10+", value: 0, color: "#4c1d95" }
+        ],
+        stopped: 0,
+        confidence: 4.0,
+        feature: "Job matching"
+      },
+      geo: {
+        struggles: [
+          { label: "Lack of experience", value: 100 },
+          { label: "Finding relevant roles", value: 0 },
+          { label: "Long applications", value: 0 },
+          { label: "Resume issues", value: 100 }
+        ],
+        applications: [
+          { label: "0-2", value: 100, color: "#d946ef" },
+          { label: "3-5", value: 0, color: "#8b5cf6" },
+          { label: "6-10", value: 0, color: "#7c3aed" },
+          { label: "10+", value: 0, color: "#4c1d95" }
+        ],
+        stopped: 100,
+        confidence: 5.0,
+        feature: "Resume feedback"
+      },
+      me: {
+        struggles: [
+          { label: "Lack of experience", value: 0 },
+          { label: "Finding relevant roles", value: 100 },
+          { label: "Long applications", value: 0 },
+          { label: "Resume issues", value: 100 }
+        ],
+        applications: [
+          { label: "0-2", value: 100, color: "#d946ef" },
+          { label: "3-5", value: 0, color: "#8b5cf6" },
+          { label: "6-10", value: 0, color: "#7c3aed" },
+          { label: "10+", value: 0, color: "#4c1d95" }
+        ],
+        stopped: 100,
+        confidence: 7.0,
+        feature: "Simpler applications"
+      },
+      phi: {
+        struggles: [
+          { label: "Lack of experience", value: 100 },
+          { label: "Finding relevant roles", value: 100 },
+          { label: "Long applications", value: 0 },
+          { label: "Resume issues", value: 0 }
+        ],
+        applications: [
+          { label: "0-2", value: 100, color: "#d946ef" },
+          { label: "3-5", value: 0, color: "#8b5cf6" },
+          { label: "6-10", value: 0, color: "#7c3aed" },
+          { label: "10+", value: 0, color: "#4c1d95" }
+        ],
+        stopped: 100,
+        confidence: 7.0,
+        feature: "Job matching"
+      }
+    };
+    let activeInsight = "all";
+
+    const flowConfig = {
+      student: {
+        total: 5,
+        steps: [
+          {
+            title: "Student Sign Up",
+            content: `
+              <p class="question-title">1) Student Sign Up</p>
+              <div class="input-grid">
+                <input class="demo-input" id="s-full-name" placeholder="Full name" value="${studentAnswers.fullName || ""}">
+                <input class="demo-input" id="s-email" placeholder="Email" value="${studentAnswers.email || ""}">
+                <input class="demo-input" id="s-school" placeholder="School" value="${studentAnswers.school || ""}">
+                <input class="demo-input" id="s-major" placeholder="Major" value="${studentAnswers.major || ""}">
+              </div>
+            `
+          },
+          {
+            title: "Student Questionnaire",
+            content: `
+              <p class="question-title">2) What type of opportunity are you looking for?</p>
+              <div class="option-list" data-question="goal">
+                <button class="option-btn" data-value="Internship">Internship</button>
+                <button class="option-btn" data-value="Full-time job">Full-time job</button>
+                <button class="option-btn" data-value="Part-time job">Part-time job</button>
+                <button class="option-btn" data-value="Project experience">Project experience</button>
+              </div>
+            `
+          },
+          {
+            title: "Student Questionnaire",
+            content: `
+              <p class="question-title">3) What skills do you want to highlight?</p>
+              <div class="option-list" data-question="skill">
+                <button class="option-btn" data-value="Excel / financial modeling">Excel / financial modeling</button>
+                <button class="option-btn" data-value="Data analysis">Data analysis</button>
+                <button class="option-btn" data-value="Marketing">Marketing</button>
+                <button class="option-btn" data-value="Project management">Project management</button>
+                <button class="option-btn" data-value="Coding">Coding</button>
+                <button class="option-btn" data-value="Communication">Communication</button>
+              </div>
+            `
+          },
+          {
+            title: "Student Questionnaire",
+            content: `
+              <p class="question-title">4) What is your biggest struggle when applying for jobs?</p>
+              <div class="option-list" data-question="struggle">
+                <button class="option-btn" data-value="Not knowing what jobs fit me">Not knowing what jobs fit me</button>
+                <button class="option-btn" data-value="Lack of experience">Lack of experience</button>
+                <button class="option-btn" data-value="Applications take too long">Applications take too long</button>
+                <button class="option-btn" data-value="Hard to stand out">Hard to stand out</button>
+                <button class="option-btn" data-value="Not getting responses">Not getting responses</button>
+              </div>
+            `
+          },
+          {
+            title: "Your Example Career Match",
+            content: `
+              <div class="match-card">
+                <div class="match-header">
+                  <strong>Student-to-Company Example Match</strong>
+                  <span class="match-badge" data-student-result="pct">--%</span>
+                </div>
+                <div class="match-item"><span class="match-label">Matched Company:</span><span data-student-result="company">--</span></div>
+                <div class="match-item"><span class="match-label">Role:</span><span data-student-result="role">--</span></div>
+                <div class="match-item"><span class="match-label">Why this match works:</span><span data-student-result="why">--</span></div>
+                <div class="match-item"><span class="match-label">Skills matched:</span><span data-student-result="skillsMatched">--</span></div>
+                <div class="match-item"><span class="match-label">Skills to improve:</span><span data-student-result="skillsImprove">--</span></div>
+                <div class="match-item"><span class="match-label">Suggested next step:</span><span data-student-result="next">--</span></div>
+                <p class="icon-note">Sparkle AI match logic: your goals, highlighted skills, and pain points were weighted to generate this sample fit.</p>
+              </div>
+              <div class="flow-actions">
+                <button class="cta secondary" id="retake-student">Retake Questionnaire</button>
+                <a class="cta primary" href="#" data-go-tab="waitlist">Join the waitlist</a>
+              </div>
+            `
+          }
+        ]
+      },
+      company: {
+        total: 5,
+        steps: [
+          {
+            title: "Company Sign Up",
+            content: `
+              <p class="question-title">1) Company Sign Up</p>
+              <div class="input-grid">
+                <input class="demo-input" id="c-name" placeholder="Company name" value="${companyAnswers.name || ""}">
+                <input class="demo-input" id="c-email" placeholder="Company email" value="${companyAnswers.email || ""}">
+                <input class="demo-input" id="c-industry" placeholder="Industry" value="${companyAnswers.industry || ""}">
+                <input class="demo-input" id="c-size" placeholder="Team size" value="${companyAnswers.size || ""}">
+              </div>
+            `
+          },
+          {
+            title: "Company Questionnaire",
+            content: `
+              <p class="question-title">2) What type of candidates are you looking for?</p>
+              <div class="option-list" data-question="candidateType">
+                <button class="option-btn" data-value="Interns">Interns</button>
+                <button class="option-btn" data-value="Entry-level employees">Entry-level employees</button>
+                <button class="option-btn" data-value="Project-based talent">Project-based talent</button>
+                <button class="option-btn" data-value="Specialized skill candidates">Specialized skill candidates</button>
+              </div>
+            `
+          },
+          {
+            title: "Company Questionnaire",
+            content: `
+              <p class="question-title">3) What matters most when reviewing candidates?</p>
+              <div class="option-list" data-question="criteria">
+                <button class="option-btn" data-value="Technical skills">Technical skills</button>
+                <button class="option-btn" data-value="Major / academic background">Major / academic background</button>
+                <button class="option-btn" data-value="Experience">Experience</button>
+                <button class="option-btn" data-value="Soft skills">Soft skills</button>
+                <button class="option-btn" data-value="Availability">Availability</button>
+                <button class="option-btn" data-value="Career interests">Career interests</button>
+              </div>
+            `
+          },
+          {
+            title: "Company Questionnaire",
+            content: `
+              <p class="question-title">4) What is your biggest challenge when hiring students?</p>
+              <div class="option-list" data-question="challenge">
+                <button class="option-btn" data-value="Too many unqualified applicants">Too many unqualified applicants</button>
+                <button class="option-btn" data-value="Hard to find the right skills">Hard to find the right skills</button>
+                <button class="option-btn" data-value="Low response rates">Low response rates</button>
+                <button class="option-btn" data-value="Time-consuming screening">Time-consuming screening</button>
+                <button class="option-btn" data-value="Poor university connections">Poor university connections</button>
+              </div>
+            `
+          },
+          {
+            title: "Your Example Candidate Match",
+            content: `
+              <div class="match-card">
+                <div class="match-header">
+                  <strong>Company-to-Student Example Match</strong>
+                  <span class="match-badge" data-company-result="pct">--%</span>
+                </div>
+                <div class="match-item"><span class="match-label">Matched Student:</span><span data-company-result="student">--</span></div>
+                <div class="match-item"><span class="match-label">Student Major:</span><span data-company-result="major">--</span></div>
+                <div class="match-item"><span class="match-label">Recommended Role Fit:</span><span data-company-result="role">--</span></div>
+                <div class="match-item"><span class="match-label">Why this match works:</span><span data-company-result="why">--</span></div>
+                <div class="match-item"><span class="match-label">Skills matched:</span><span data-company-result="skills">--</span></div>
+                <div class="match-item"><span class="match-label">Suggested next step:</span><span data-company-result="next">--</span></div>
+                <p class="icon-note">Sparkle AI match logic: hiring goals, screening priorities, and hiring challenge signals were combined to rank this fit.</p>
+              </div>
+              <div class="flow-actions">
+                <button class="cta secondary" id="retake-company">Retake Questionnaire</button>
+                <a class="cta primary" href="#" data-go-tab="waitlist">Join the waitlist</a>
+              </div>
+            `
+          }
+        ]
+      },
+      university: {
+        total: 8,
+        steps: [
+          {
+            title: "University Questionnaire",
+            content: `
+              <p class="question-title">1) What is your university size?</p>
+              <div class="option-list" data-question="size">
+                <button class="option-btn" data-value="Under 1,000 students">Under 1,000 students</button>
+                <button class="option-btn" data-value="1,000-5,000 students">1,000–5,000 students</button>
+                <button class="option-btn" data-value="5,000-15,000 students">5,000–15,000 students</button>
+                <button class="option-btn" data-value="15,000+ students">15,000+ students</button>
+              </div>
+            `
+          },
+          {
+            title: "University Questionnaire",
+            content: `
+              <p class="question-title">2) What type of institution are you?</p>
+              <div class="option-list" data-question="institution">
+                <button class="option-btn" data-value="Public university">Public university</button>
+                <button class="option-btn" data-value="Private university">Private university</button>
+                <button class="option-btn" data-value="Community college">Community college</button>
+                <button class="option-btn" data-value="Other">Other</button>
+              </div>
+            `
+          },
+          {
+            title: "University Questionnaire",
+            content: `
+              <p class="question-title">3) What percentage of students secure jobs within 6 months of graduation?</p>
+              <div class="option-list" data-question="jobRate">
+                <button class="option-btn" data-value="0-25%">0–25%</button>
+                <button class="option-btn" data-value="25-50%">25–50%</button>
+                <button class="option-btn" data-value="50-75%">50–75%</button>
+                <button class="option-btn" data-value="75%+">75%+</button>
+              </div>
+            `
+          },
+          {
+            title: "University Questionnaire",
+            content: `
+              <p class="question-title">4) How do you currently track student outcomes?</p>
+              <div class="option-list" data-question="tracking">
+                <button class="option-btn" data-value="Surveys">Surveys</button>
+                <button class="option-btn" data-value="Internal systems">Internal systems</button>
+                <button class="option-btn" data-value="Not tracked consistently">Not tracked consistently</button>
+                <button class="option-btn" data-value="We do not track this yet">We do not track this yet</button>
+              </div>
+            `
+          },
+          {
+            title: "University Questionnaire",
+            content: `
+              <p class="question-title">5) How many active employer partnerships do you have?</p>
+              <div class="option-list" data-question="employers">
+                <button class="option-btn" data-value="Under 20">Under 20</button>
+                <button class="option-btn" data-value="20-100">20–100</button>
+                <button class="option-btn" data-value="100+">100+</button>
+              </div>
+            `
+          },
+          {
+            title: "University Questionnaire",
+            content: `
+              <p class="question-title">6) What is your biggest challenge with career outcomes?</p>
+              <div class="option-list" data-question="challenge">
+                <button class="option-btn" data-value="Personalized job matching">Personalized job matching</button>
+                <button class="option-btn" data-value="Student skill tracking">Student skill tracking</button>
+                <button class="option-btn" data-value="Employer communication">Employer communication</button>
+                <button class="option-btn" data-value="Outcome analytics">Outcome analytics</button>
+              </div>
+            `
+          },
+          {
+            title: "University Questionnaire",
+            content: `
+              <p class="question-title">7) How likely would your university be to use a platform that tracks outcomes and improves job matching?</p>
+              <div class="option-list" data-question="likelihood">
+                <button class="option-btn" data-value="Not likely">Not likely</button>
+                <button class="option-btn" data-value="Maybe">Maybe</button>
+                <button class="option-btn" data-value="Very likely">Very likely</button>
+              </div>
+            `
+          },
+          {
+            title: "University Readiness Dashboard",
+            content: `
+              <div class="uni-stat"><strong>Estimated student reach:</strong> <span data-result="reach">--</span></div>
+              <div class="uni-stat"><strong>Career tracking maturity:</strong> <span data-result="maturity">--</span></div>
+              <div class="uni-stat"><strong>Employer partnership strength:</strong> <span data-result="partners">--</span></div>
+              <div class="uni-stat"><strong>Biggest improvement area:</strong> <span data-result="improvement">--</span></div>
+              <div class="uni-stat"><strong>Platform adoption likelihood:</strong> <span data-result="adoption">--</span></div>
+              <div class="flow-actions">
+                <button class="cta secondary" id="retake-university">Retake Questionnaire</button>
+                <a class="cta primary" href="#" data-go-tab="waitlist">Join the waitlist</a>
+              </div>
+            `
+          }
+        ]
+      }
+    };
+
+    const roleCards = document.querySelectorAll(".role-card");
+    const tabLinks = document.querySelectorAll(".tab-link");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+    const stepCount = document.getElementById("step-count");
+    const progressBar = document.getElementById("progress-bar");
+    const flowView = document.getElementById("flow-view");
+    const majorFilter = document.getElementById("major-filter");
+    const barsWrap = document.getElementById("bars-wrap");
+    const pieChart = document.getElementById("pie-chart");
+    const pieLegend = document.getElementById("pie-legend");
+    const stopCounter = document.getElementById("counter-stop");
+    const confidenceCounter = document.getElementById("counter-confidence");
+    const featureCounter = document.getElementById("counter-feature");
+
+    function setActiveTab(tabName) {
+      tabLinks.forEach((link) => {
+        link.classList.toggle("active-tab", link.dataset.tab === tabName);
+      });
+      tabPanels.forEach((panel) => {
+        panel.classList.toggle("active", panel.dataset.panel === tabName);
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function animateCounter(el, target, suffix = "", decimals = 0) {
+      const start = 0;
+      const duration = 850;
+      const startTime = performance.now();
+
+      function frame(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = start + (target - start) * eased;
+        el.textContent = `${value.toFixed(decimals)}${suffix}`;
+        if (progress < 1) requestAnimationFrame(frame);
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    function renderBars(data) {
+      barsWrap.innerHTML = data.map((item) => `
+        <div class="bar-row" title="${item.value}%">
+          <div class="bar-label">
+            <span>${item.label}</span>
+            <strong>${item.value}%</strong>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" data-target="${item.value}"></div>
+          </div>
+        </div>
+      `).join("");
+
+      requestAnimationFrame(() => {
+        document.querySelectorAll(".bar-fill").forEach((bar) => {
+          bar.style.width = `${bar.dataset.target}%`;
+        });
+      });
+    }
+
+    function renderPie(data) {
+      let cumulative = 0;
+      const stops = [];
+      data.forEach((slice) => {
+        const start = cumulative * 3.6;
+        cumulative += slice.value;
+        const end = cumulative * 3.6;
+        stops.push(`${slice.color} ${start}deg ${end}deg`);
+      });
+      pieChart.classList.remove("ready");
+      pieChart.style.background = `conic-gradient(${stops.join(", ")})`;
+
+      pieLegend.innerHTML = data.map((slice) => `
+        <div class="legend-item" title="${slice.label}: ${slice.value}%">
+          <span class="legend-dot" style="background:${slice.color}"></span>
+          <span>${slice.label} <strong>${slice.value}%</strong></span>
+        </div>
+      `).join("");
+
+      setTimeout(() => pieChart.classList.add("ready"), 30);
+    }
+
+    function renderInsights() {
+      const data = insightData[activeInsight];
+      renderBars(data.struggles);
+      renderPie(data.applications);
+      animateCounter(stopCounter, data.stopped, "%", 0);
+      animateCounter(confidenceCounter, data.confidence, "", 1);
+      featureCounter.textContent = data.feature;
+    }
+
+    function getRoleAnswers() {
+      if (state.role === "student") return studentAnswers;
+      if (state.role === "company") return companyAnswers;
+      return universityAnswers;
+    }
+
+    function renderStep() {
+      const cfg = flowConfig[state.role];
+      const stepData = cfg.steps[state.step];
+      const current = state.step + 1;
+      const pct = (current / cfg.total) * 100;
+
+      stepCount.textContent = `Step ${current} of ${cfg.total}`;
+      progressBar.style.width = `${pct}%`;
+
+      flowView.classList.add("fade");
+      setTimeout(() => {
+        const showControls = !(
+          (state.role === "student" && state.step === cfg.total - 1) ||
+          (state.role === "company" && state.step === cfg.total - 1) ||
+          (state.role === "university" && state.step === cfg.total - 1)
+        );
+        flowView.innerHTML = `
+          <h3>${stepData.title}</h3>
+          ${stepData.content}
+          ${showControls ? `
+            <div class="flow-actions">
+              <button class="cta secondary" ${state.step === 0 ? "disabled" : ""} id="prev-step">Back</button>
+              <button class="cta primary" id="next-step">${state.step + 1 === cfg.total ? "Finish" : "Next"}</button>
+            </div>
+          ` : ""}
+        `;
+        flowView.classList.remove("fade");
+        bindStepButtons();
+        bindRoleOptions();
+        if (state.role === "student" && state.step === cfg.total - 1) {
+          renderStudentSummary();
+          const retakeBtn = document.getElementById("retake-student");
+          if (retakeBtn) {
+            retakeBtn.addEventListener("click", () => {
+              Object.keys(studentAnswers).forEach((k) => delete studentAnswers[k]);
+              state.step = 0;
+              renderStep();
+            });
+          }
+        }
+        if (state.role === "company" && state.step === cfg.total - 1) {
+          renderCompanySummary();
+          const retakeBtn = document.getElementById("retake-company");
+          if (retakeBtn) {
+            retakeBtn.addEventListener("click", () => {
+              Object.keys(companyAnswers).forEach((k) => delete companyAnswers[k]);
+              state.step = 0;
+              renderStep();
+            });
+          }
+        }
+        if (state.role === "university" && state.step === cfg.total - 1) {
+          renderUniversitySummary();
+          const retakeBtn = document.getElementById("retake-university");
+          if (retakeBtn) {
+            retakeBtn.addEventListener("click", () => {
+              Object.keys(universityAnswers).forEach((k) => delete universityAnswers[k]);
+              state.step = 0;
+              renderStep();
+            });
+          }
+        }
+      }, 130);
+    }
+
+    function bindRoleOptions() {
+      const optionList = flowView.querySelector(".option-list");
+      if (!optionList) return;
+
+      const questionKey = optionList.dataset.question;
+      const answerStore = getRoleAnswers();
+      const buttons = optionList.querySelectorAll(".option-btn");
+      const isMulti = (state.role === "student" && questionKey === "skill") || (state.role === "company" && questionKey === "criteria");
+      if (isMulti && !Array.isArray(answerStore[questionKey])) answerStore[questionKey] = [];
+
+      buttons.forEach((btn) => {
+        const selected = isMulti
+          ? (answerStore[questionKey] || []).includes(btn.dataset.value)
+          : answerStore[questionKey] === btn.dataset.value;
+        if (selected) {
+          btn.classList.add("selected");
+        }
+        btn.addEventListener("click", () => {
+          if (isMulti) {
+            const arr = answerStore[questionKey] || [];
+            const idx = arr.indexOf(btn.dataset.value);
+            if (idx >= 0) {
+              arr.splice(idx, 1);
+              btn.classList.remove("selected");
+            } else {
+              arr.push(btn.dataset.value);
+              btn.classList.add("selected");
+            }
+            answerStore[questionKey] = arr;
+          } else {
+            answerStore[questionKey] = btn.dataset.value;
+            buttons.forEach((b) => b.classList.remove("selected"));
+            btn.classList.add("selected");
+          }
+        });
+      });
+    }
+
+    function renderStudentSummary() {
+      const pickedSkills = studentAnswers.skill || [];
+      const hasData = pickedSkills.includes("Data analysis");
+      const hasExcel = pickedSkills.includes("Excel / financial modeling");
+      const hasCode = pickedSkills.includes("Coding");
+      const wantsIntern = studentAnswers.goal === "Internship";
+
+      let match = {
+        pct: 84,
+        company: "GrowthPath Labs",
+        role: wantsIntern ? "Operations Intern" : "Operations Associate",
+        why: "Your selected goals and strengths align with this team’s cross-functional hiring profile.",
+        skillsMatched: pickedSkills.length ? pickedSkills.join(", ") : "Communication, project ownership",
+        skillsImprove: "Stakeholder reporting, dashboard storytelling",
+        next: "Complete a short mock project to strengthen your profile before applying."
+      };
+
+      if (hasData && hasExcel && wantsIntern) {
+        match = {
+          pct: 93,
+          company: "FinSight Analytics",
+          role: "Data Analyst Intern",
+          why: "This company is looking for students with strong Excel and data analysis skills.",
+          skillsMatched: "Excel, data analysis, communication",
+          skillsImprove: "SQL, dashboard building",
+          next: "Complete a mock project or skills assessment to strengthen your profile."
+        };
+      } else if (hasCode) {
+        match = {
+          pct: 90,
+          company: "Vertex Product Systems",
+          role: wantsIntern ? "Product Data Intern" : "Junior Product Analyst",
+          why: "Your coding and problem-solving focus maps to this team’s product analytics workflow.",
+          skillsMatched: "Coding, analysis, project management",
+          skillsImprove: "Experiment design, stakeholder communication",
+          next: "Build and share one portfolio project tied to product metrics."
+        };
+      } else if (studentAnswers.struggle === "Hard to stand out") {
+        match.pct = 88;
+        match.next = "Polish one quantified resume bullet and run a mock interview practice before submitting applications.";
+      }
+
+      const setText = (selector, value, fallback = "Not provided") => {
+        const el = flowView.querySelector(selector);
+        if (el) el.textContent = value || fallback;
+      };
+      setText('[data-student-result="pct"]', `${match.pct}%`);
+      setText('[data-student-result="company"]', match.company);
+      setText('[data-student-result="role"]', match.role);
+      setText('[data-student-result="why"]', match.why);
+      setText('[data-student-result="skillsMatched"]', match.skillsMatched);
+      setText('[data-student-result="skillsImprove"]', match.skillsImprove);
+      setText('[data-student-result="next"]', match.next);
+    }
+
+    function renderCompanySummary() {
+      const criteria = companyAnswers.criteria || [];
+      const wantsInterns = companyAnswers.candidateType === "Interns";
+      const needsTech = criteria.includes("Technical skills");
+      const needsExp = criteria.includes("Experience");
+
+      let match = {
+        pct: 85,
+        student: "Jordan Lee",
+        major: "Computer Science",
+        role: wantsInterns ? "Product Operations Intern" : "Entry-level Analyst",
+        why: "This candidate’s profile aligns with your current hiring priorities and role format.",
+        skills: "Project coordination, communication, data literacy",
+        next: "Invite this student for a structured skills-based screen."
+      };
+
+      if (wantsInterns && needsTech && needsExp && companyAnswers.challenge === "Hard to find the right skills") {
+        match = {
+          pct: 92,
+          student: "Maya Chen",
+          major: "Business & Technology Management",
+          role: "Data/Operations Intern",
+          why: "Maya has experience with Excel, data analysis, and project management.",
+          skills: "Excel, data analysis, project coordination",
+          next: "Invite this student to complete a short skills-based mock test."
+        };
+      } else if (criteria.includes("Soft skills")) {
+        match.pct = 88;
+        match.student = "Avery Brooks";
+        match.major = "Management of Technology";
+        match.skills = "Communication, stakeholder management, structured problem solving";
+      }
+
+      const setText = (selector, value, fallback = "Not provided") => {
+        const el = flowView.querySelector(selector);
+        if (el) el.textContent = value || fallback;
+      };
+      setText('[data-company-result="pct"]', `${match.pct}%`);
+      setText('[data-company-result="student"]', match.student);
+      setText('[data-company-result="major"]', match.major);
+      setText('[data-company-result="role"]', match.role);
+      setText('[data-company-result="why"]', match.why);
+      setText('[data-company-result="skills"]', match.skills);
+      setText('[data-company-result="next"]', match.next);
+    }
+
+    function renderUniversitySummary() {
+      const reachMap = {
+        "Under 1,000 students": "Low reach (under 1,000 students)",
+        "1,000-5,000 students": "Medium reach (1,000-5,000 students)",
+        "5,000-15,000 students": "High reach (5,000-15,000 students)",
+        "15,000+ students": "Very high reach (15,000+ students)"
+      };
+      const maturityMap = {
+        "Internal systems": "Strong",
+        "Surveys": "Moderate",
+        "Not tracked consistently": "Developing",
+        "We do not track this yet": "Early stage"
+      };
+      const partnerMap = {
+        "Under 20": "Emerging partnership network",
+        "20-100": "Growing partnership network",
+        "100+": "Strong partnership network"
+      };
+
+      const setText = (selector, value, fallback = "Not provided") => {
+        const el = flowView.querySelector(selector);
+        if (el) el.textContent = value || fallback;
+      };
+
+      setText('[data-result="reach"]', reachMap[universityAnswers.size]);
+      setText('[data-result="maturity"]', maturityMap[universityAnswers.tracking]);
+      setText('[data-result="partners"]', partnerMap[universityAnswers.employers]);
+      setText('[data-result="improvement"]', universityAnswers.challenge);
+      setText('[data-result="adoption"]', universityAnswers.likelihood);
+    }
+
+    function bindStepButtons() {
+      const prev = document.getElementById("prev-step");
+      const next = document.getElementById("next-step");
+      const cfg = flowConfig[state.role];
+
+      if (prev) {
+        prev.addEventListener("click", () => {
+          if (state.step > 0) {
+            state.step -= 1;
+            renderStep();
+          }
+        });
+      }
+
+      if (next) {
+        next.addEventListener("click", () => {
+          if (state.role === "student" && state.step === 0) {
+            const fullName = document.getElementById("s-full-name")?.value.trim();
+            const email = document.getElementById("s-email")?.value.trim();
+            const school = document.getElementById("s-school")?.value.trim();
+            const major = document.getElementById("s-major")?.value.trim();
+            if (!fullName || !email || !school || !major) return;
+            studentAnswers.fullName = fullName;
+            studentAnswers.email = email;
+            studentAnswers.school = school;
+            studentAnswers.major = major;
+          }
+          if (state.role === "company" && state.step === 0) {
+            const name = document.getElementById("c-name")?.value.trim();
+            const email = document.getElementById("c-email")?.value.trim();
+            const industry = document.getElementById("c-industry")?.value.trim();
+            const size = document.getElementById("c-size")?.value.trim();
+            if (!name || !email || !industry || !size) return;
+            companyAnswers.name = name;
+            companyAnswers.email = email;
+            companyAnswers.industry = industry;
+            companyAnswers.size = size;
+          }
+          if (state.role === "student" && state.step < cfg.total - 1) {
+            const keyOrder = ["fullName", "goal", "skill", "struggle"];
+            const currentKey = keyOrder[state.step];
+            if (currentKey === "skill" && (!Array.isArray(studentAnswers.skill) || studentAnswers.skill.length === 0)) return;
+            if (currentKey && currentKey !== "skill" && !studentAnswers[currentKey]) return;
+          }
+          if (state.role === "company" && state.step < cfg.total - 1) {
+            const keyOrder = ["name", "candidateType", "criteria", "challenge"];
+            const currentKey = keyOrder[state.step];
+            if (currentKey === "criteria" && (!Array.isArray(companyAnswers.criteria) || companyAnswers.criteria.length === 0)) return;
+            if (currentKey && currentKey !== "criteria" && !companyAnswers[currentKey]) return;
+          }
+          if (state.role === "university" && state.step < cfg.total - 1) {
+            const keyOrder = ["size", "institution", "jobRate", "tracking", "employers", "challenge", "likelihood"];
+            const currentKey = keyOrder[state.step];
+            if (currentKey && !universityAnswers[currentKey]) return;
+          }
+          if (state.step < cfg.total - 1) {
+            state.step += 1;
+            renderStep();
+          } else {
+            state.step = 0;
+            renderStep();
+          }
+        });
+      }
+    }
+
+    roleCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        roleCards.forEach((c) => c.classList.remove("active"));
+        card.classList.add("active");
+        state.role = card.dataset.role;
+        state.step = 0;
+        renderStep();
+      });
+    });
+
+    majorFilter.addEventListener("change", (e) => {
+      activeInsight = e.target.value;
+      renderInsights();
+    });
+
+    tabLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        setActiveTab(link.dataset.tab);
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      const goTab = e.target.closest("[data-go-tab]");
+      if (!goTab) return;
+      e.preventDefault();
+      setActiveTab(goTab.dataset.goTab);
+    });
+
+    renderInsights();
+    renderStep();
+  </script>
+</body>
+</html>
