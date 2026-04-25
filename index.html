@@ -9,13 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --page-violet: #e9e2f4;
-      --welcome-purple: #5b21b6;
-      --welcome-purple-deep: #4c1d95;
-      --text-muted: rgba(60, 40, 100, 0.62);
-      --btn: #5b21b6;
-      --btn-hover: #4c1d95;
-      --btn-shadow: rgba(91, 33, 182, 0.28);
+      --welcome-purple: #6d28d9;
+      --welcome-purple-mid: #7c3aed;
+      --header-purple: #57068c;
+      --btn-top: #a78bfa;
+      --btn-mid: #8b5cf6;
+      --btn-bottom: #5b21b6;
+      --btn-shadow: rgba(91, 33, 182, 0.38);
+      --spark: #e879f9;
+      --spark-hot: #d946ef;
       --nyu-violet: #57068c;
     }
 
@@ -30,20 +32,33 @@
 
     body {
       font-family: "Inter", system-ui, -apple-system, sans-serif;
-      color: var(--welcome-purple-deep);
-      background: var(--page-violet);
+      color: var(--header-purple);
+      min-height: 100dvh;
+      background:
+        radial-gradient(ellipse 100% 88% at 50% 38%, #fdfcff 0%, #f7f2ff 42%, #efe6fb 72%, #e8def7 100%);
       overflow-x: hidden;
       opacity: 0;
-      animation: pageIn 1s ease forwards;
+      animation: pageIn 0.85s ease forwards;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.42;
+      background-image:
+        radial-gradient(rgba(91, 33, 182, 0.12) 0.8px, transparent 1.05px),
+        radial-gradient(rgba(124, 58, 237, 0.09) 0.65px, transparent 0.95px),
+        radial-gradient(rgba(109, 40, 217, 0.07) 1px, transparent 1.15px);
+      background-size: 40px 44px, 58px 52px, 26px 32px;
+      background-position: 0 0, 16px 24px, 9px 5px;
     }
 
     @keyframes pageIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .page {
@@ -60,7 +75,7 @@
       align-items: center;
       gap: 0.65rem;
       opacity: 0;
-      animation: fadeUp 0.9s ease 0.15s forwards;
+      animation: fadeUp 0.85s ease 0.12s forwards;
     }
 
     @keyframes fadeUp {
@@ -75,17 +90,18 @@
     }
 
     .nyu-logo {
-      width: clamp(28px, 7vw, 36px);
+      width: clamp(30px, 7vw, 38px);
       height: auto;
       flex-shrink: 0;
       display: block;
+      filter: drop-shadow(0 2px 6px rgba(87, 6, 140, 0.2));
     }
 
     .brand-name {
-      font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+      font-size: clamp(0.82rem, 2.2vw, 0.98rem);
       font-weight: 600;
       letter-spacing: -0.02em;
-      color: var(--text-muted);
+      color: var(--header-purple);
     }
 
     .main {
@@ -94,64 +110,85 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      gap: clamp(1.5rem, 4vw, 2.25rem);
+      gap: clamp(1.35rem, 3.8vw, 2rem);
       padding-block: clamp(1rem, 4vh, 2rem);
     }
 
     .hero-wrap {
       display: inline-block;
       opacity: 0;
-      animation: fadeUp 1s ease 0.35s forwards;
+      animation: fadeUp 0.9s ease 0.28s forwards;
     }
 
     .welcome {
+      position: relative;
+      display: inline-block;
       margin: 0;
-      font-size: clamp(2.75rem, 10vw, 4.75rem);
+      font-size: clamp(2.85rem, 10.5vw, 5rem);
       font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
+      letter-spacing: -0.045em;
+      line-height: 1.02;
       color: var(--welcome-purple);
+    }
+
+    .sparkle {
+      position: absolute;
+      right: -0.06em;
+      top: -0.02em;
+      width: clamp(20px, 5vw, 30px);
+      height: clamp(20px, 5vw, 30px);
+      transform: translate(58%, -48%);
+      pointer-events: none;
+    }
+
+    .sparkle svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 0 6px rgba(217, 70, 239, 0.45));
     }
 
     .cta-wrap {
       opacity: 0;
-      animation: fadeUp 1s ease 0.55s forwards;
+      animation: fadeUp 0.9s ease 0.45s forwards;
     }
 
     .cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.95rem 2.25rem;
+      padding: 1rem 2.5rem;
       font-family: inherit;
-      font-size: clamp(0.95rem, 2.4vw, 1.05rem);
+      font-size: clamp(0.98rem, 2.4vw, 1.08rem);
       font-weight: 600;
       letter-spacing: -0.01em;
       color: #fff;
       text-decoration: none;
-      background: var(--btn);
       border: none;
-      border-radius: 14px;
+      border-radius: 999px;
       cursor: pointer;
+      background: linear-gradient(180deg, var(--btn-top) 0%, var(--btn-mid) 38%, var(--welcome-purple) 72%, var(--btn-bottom) 100%);
       box-shadow:
-        0 4px 20px var(--btn-shadow),
-        0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+        0 16px 36px var(--btn-shadow),
+        0 6px 14px rgba(91, 33, 182, 0.22),
+        0 0 0 1px rgba(255, 255, 255, 0.12) inset;
       transition:
-        transform 0.22s ease,
-        background 0.22s ease,
-        box-shadow 0.22s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
     }
 
     .cta:hover {
-      background: var(--btn-hover);
-      transform: scale(1.035);
+      transform: scale(1.04) translateY(-1px);
+      filter: brightness(1.05);
       box-shadow:
-        0 8px 28px rgba(45, 27, 78, 0.55),
-        0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+        0 20px 44px rgba(91, 33, 182, 0.42),
+        0 8px 18px rgba(91, 33, 182, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.15) inset;
     }
 
     .cta:focus-visible {
-      outline: 2px solid var(--welcome-purple);
+      outline: 2px solid var(--welcome-purple-mid);
       outline-offset: 4px;
     }
 
@@ -168,6 +205,10 @@
         opacity: 1 !important;
         transform: none !important;
       }
+
+      .cta:hover {
+        transform: none;
+      }
     }
   </style>
 </head>
@@ -176,7 +217,7 @@
     <header class="top-bar">
       <svg class="nyu-logo" viewBox="0 0 44 36" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NYU">
         <title>NYU</title>
-        <rect width="44" height="36" rx="7" fill="var(--nyu-violet)"/>
+        <rect width="44" height="36" rx="9" fill="var(--nyu-violet)"/>
         <text
           x="50%"
           y="50%"
@@ -194,11 +235,23 @@
 
     <main class="main">
       <div class="hero-wrap">
-        <h1 class="welcome">Welcome</h1>
+        <h1 class="welcome">
+          Welcome
+          <span class="sparkle" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="7" r="1.35" fill="var(--spark)"/>
+              <circle cx="28.5" cy="9.5" r="1" fill="var(--spark-hot)"/>
+              <path
+                d="M16 2.5l2.2 7.1 7.1 2.2-7.1 2.2L16 21.2l-2.2-7.2-7.1-2.2 7.1-2.2L16 2.5z"
+                fill="var(--spark-hot)"
+              />
+            </svg>
+          </span>
+        </h1>
       </div>
       <div class="cta-wrap">
         <a class="cta" href="landing-page.html">Start Here</a>
-            </div>
+      </div>
     </main>
   </div>
 </body>

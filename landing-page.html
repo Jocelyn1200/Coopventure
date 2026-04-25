@@ -266,6 +266,22 @@
       font-size: 1.02rem;
     }
 
+    .waitlist-thanks {
+      margin: 14px 0 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #f0e8ff;
+      border: 1px solid #dcc9ff;
+      color: #5b21b6;
+      font-size: 0.98rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .waitlist-thanks[hidden] {
+      display: none;
+    }
+
     .mock-test-shell {
       background: #f4eeff;
       border: 1px solid var(--border);
@@ -822,11 +838,14 @@
         <p class="section-intro">
           Share your information and we will reach out when early access opens.
         </p>
-        <form class="section-form" action="#" method="post">
+        <form id="waitlist-form" class="section-form" action="#" method="post">
           <input type="text" name="fullName" placeholder="Full name" required>
           <input type="email" name="email" placeholder="Email address" required>
           <button class="cta primary" type="submit">Join Waitlist</button>
         </form>
+        <p class="waitlist-thanks" id="waitlist-thanks" role="status" aria-live="polite" hidden>
+          Thank you, we will inform you of any updates
+        </p>
       </div>
     </section>
   </main>
@@ -1751,6 +1770,16 @@
       e.preventDefault();
       setActiveTab(goTab.dataset.goTab);
     });
+
+    const waitlistForm = document.getElementById("waitlist-form");
+    const waitlistThanks = document.getElementById("waitlist-thanks");
+    if (waitlistForm && waitlistThanks) {
+      waitlistForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!waitlistForm.reportValidity()) return;
+        waitlistThanks.hidden = false;
+      });
+    }
 
     renderInsights();
     renderStep();
