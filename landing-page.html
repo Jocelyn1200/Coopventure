@@ -6,13 +6,13 @@
   <title>The Coop Venture | Career Prep Platform</title>
   <style>
     :root {
-      --bg: #faf7ff;
+      --bg: #e7f1ff;
       --card: #ffffff;
-      --text: #24163f;
-      --muted: #5f4b86;
-      --accent: #7c3aed;
-      --accent-soft: #efe7ff;
-      --border: #dccbff;
+      --text: #0f2f5f;
+      --muted: #2f5b8f;
+      --accent: #1f5ea8;
+      --accent-soft: #d9ebff;
+      --border: #b8d5f2;
     }
 
     * { box-sizing: border-box; }
@@ -20,9 +20,41 @@
     body {
       margin: 0;
       font-family: Inter, Arial, sans-serif;
-      background: var(--bg);
+      background: #d8e4f5;
       color: var(--text);
       line-height: 1.5;
+      position: relative;
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(245, 250, 255, 0.3) 0%, rgba(221, 232, 248, 0.45) 100%),
+        url("assets/index-bg.png") center / cover no-repeat;
+      filter: contrast(1.17) saturate(1.12) brightness(1.03);
+      opacity: 0.98;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 50% 18%, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0) 56%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(120, 148, 187, 0.18) 100%);
+    }
+
+    body > * {
+      position: relative;
+      z-index: 1;
     }
 
     .container {
@@ -34,7 +66,7 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(250, 247, 255, 0.92);
+      background: rgba(232, 242, 255, 0.92);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
     }
@@ -60,13 +92,13 @@
       width: 34px;
       height: 34px;
       border-radius: 10px;
-      background: #5b21b6;
+      background: #1a4e8a;
       color: #fff;
       font-weight: 800;
       font-size: 0.75rem;
       letter-spacing: 0.02em;
-      border: 1px solid #4c1d95;
-      box-shadow: 0 6px 14px rgba(91, 33, 182, 0.25);
+      border: 1px solid #123d72;
+      box-shadow: 0 6px 14px rgba(18, 61, 114, 0.25);
     }
 
     .brand {
@@ -87,17 +119,17 @@
       border-radius: 999px;
       padding: 8px 12px;
       font-size: 0.9rem;
-      background: #f2eaff;
+      background: #e4f1ff;
     }
 
     .nav-links a:hover {
-      background: #eadfff;
+      background: #d8eaff;
     }
 
     .nav-links a.active-tab {
-      background: #7c3aed;
+      background: #1f5ea8;
       color: #fff;
-      border-color: #7c3aed;
+      border-color: #1f5ea8;
     }
 
     .tab-panel {
@@ -119,11 +151,11 @@
     }
 
     .hero {
-      background: linear-gradient(145deg, #ffffff, #efe7ff);
+      background: linear-gradient(145deg, #ffffff, #dfefff);
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 42px 30px;
-      box-shadow: 0 14px 32px rgba(97, 51, 177, 0.14);
+      box-shadow: 0 14px 32px rgba(18, 61, 114, 0.14);
     }
 
     .eyebrow {
@@ -168,12 +200,12 @@
     .cta.primary {
       background: var(--accent);
       color: #fff;
-      border-color: #6d28d9;
+      border-color: #184d87;
     }
 
     .cta.secondary {
       color: var(--text);
-      background: #f7f2ff;
+      background: #edf6ff;
       border-color: var(--border);
     }
 
