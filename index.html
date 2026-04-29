@@ -3,48 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coop Venture — Welcome</title>
+  <title>Student Career Onboarding Flow</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --welcome-purple: #0f2f5f;
-      --welcome-purple-mid: #1a4e8a;
-      --header-purple: #0b2852;
-      --btn-top: #8fc3f4;
-      --btn-mid: #4f8fcd;
-      --btn-bottom: #1f4f86;
-      --btn-shadow: rgba(20, 66, 122, 0.38);
-      --spark: #72b4f0;
-      --spark-hot: #3f8bd8;
-      --nyu-violet: #123d72;
+      --bg: #f8f5ff;
+      --text: #2d2d45;
+      --muted: #666683;
+      --blue: #b9dcff;
+      --yellow: #ffe9ac;
+      --orange: #ffd1ad;
+      --purple: #ddd2ff;
+      --card: #ffffff;
+      --shadow: 0 14px 30px rgba(74, 57, 119, 0.12);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-sm: 12px;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-
     body {
+      margin: 0;
       font-family: "Inter", system-ui, -apple-system, sans-serif;
-      color: var(--header-purple);
-      min-height: 100dvh;
+      color: var(--text);
       background: #d8e4f5;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      position: relative;
       overflow-x: hidden;
-      opacity: 0;
-      animation: pageIn 0.85s ease forwards;
     }
 
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      z-index: 0;
+      z-index: -2;
       pointer-events: none;
       background:
         linear-gradient(180deg, rgba(245, 250, 255, 0.3) 0%, rgba(221, 232, 248, 0.45) 100%),
@@ -57,219 +57,1017 @@
       content: "";
       position: fixed;
       inset: 0;
-      z-index: 0;
+      z-index: -1;
       pointer-events: none;
       background:
         radial-gradient(ellipse at 50% 18%, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0) 56%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(120, 148, 187, 0.18) 100%);
     }
 
-    @keyframes pageIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .page {
+    body > * {
       position: relative;
       z-index: 1;
-      min-height: 100dvh;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      padding: clamp(1rem, 3vw, 1.75rem) clamp(1.25rem, 5vw, 2.5rem) clamp(2rem, 6vw, 3rem);
     }
 
-    .top-bar {
+    .wizard {
+      width: min(720px, 100%);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(4px);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .header {
+      margin-bottom: 16px;
+    }
+
+    .progress-meta {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 0.65rem;
-      opacity: 0;
-      animation: fadeUp 0.85s ease 0.12s forwards;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      color: var(--muted);
     }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #ece8ff;
+      overflow: hidden;
     }
 
-    .nyu-logo {
-      width: clamp(30px, 7vw, 38px);
-      height: auto;
-      flex-shrink: 0;
+    .progress-fill {
+      width: 16.6%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #8bc8ff 0%, #a994ff 100%);
+      transition: width 0.45s ease;
+    }
+
+    .step {
+      display: none;
+      animation: fadeSlide 0.35s ease;
+    }
+
+    .step.active {
       display: block;
-      filter: drop-shadow(0 2px 6px rgba(18, 61, 114, 0.24));
     }
 
-    .brand-name {
-      font-size: clamp(0.82rem, 2.2vw, 0.98rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--header-purple);
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .main {
+    .step-shell {
+      border-radius: var(--radius-xl);
+      padding: 22px;
+      background: var(--card);
+      border: 1px solid rgba(129, 118, 192, 0.16);
+    }
+
+    .theme-blue { background: linear-gradient(180deg, #eef7ff 0%, #ffffff 100%); }
+    .theme-yellow { background: linear-gradient(180deg, #fff9e8 0%, #ffffff 100%); }
+    .theme-orange { background: linear-gradient(180deg, #fff1e7 0%, #ffffff 100%); }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.45rem, 4.2vw, 2rem);
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .field {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: clamp(1.35rem, 3.8vw, 2rem);
-      padding-block: clamp(1rem, 4vh, 2rem);
+      gap: 6px;
     }
 
-    .hero-wrap {
-      display: inline-block;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.28s forwards;
+    .field.full {
+      grid-column: 1 / -1;
     }
 
-    .welcome {
-      position: relative;
-      display: inline-block;
-      margin: 0;
-      font-size: clamp(2.85rem, 10.5vw, 5rem);
-      font-weight: 800;
-      letter-spacing: -0.045em;
-      line-height: 1.02;
-      color: var(--welcome-purple);
-    }
-
-    .welcome-subtitle {
-      margin: 0.6rem 0 0;
-      font-size: clamp(0.95rem, 2.7vw, 1.2rem);
+    label {
+      font-size: 0.86rem;
       font-weight: 600;
-      letter-spacing: -0.01em;
-      color: var(--body-gray);
+      color: #44436a;
     }
 
-    .sparkle {
-      position: absolute;
-      right: -0.06em;
-      top: -0.02em;
-      width: clamp(20px, 5vw, 30px);
-      height: clamp(20px, 5vw, 30px);
-      transform: translate(58%, -48%);
-      pointer-events: none;
-    }
-
-    .sparkle svg {
+    input, textarea, select {
       width: 100%;
-      height: 100%;
-      display: block;
-      filter: drop-shadow(0 0 6px rgba(63, 139, 216, 0.45));
+      border: 1px solid #d7d0f8;
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .cta-wrap {
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.45s forwards;
+    textarea {
+      min-height: 100px;
+      resize: vertical;
     }
 
-    .cta {
-      display: inline-flex;
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #9a89eb;
+      box-shadow: 0 0 0 3px rgba(154, 137, 235, 0.2);
+    }
+
+    .upload-box {
+      margin-top: 4px;
+      border: 1px dashed #c8bcef;
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      background: #faf8ff;
+    }
+
+    .small {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .actions {
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .btn-primary {
+      background: #5f53b8;
+      color: #fff;
+    }
+
+    .btn-ghost {
+      background: #ebe7ff;
+      color: #4f467b;
+    }
+
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      border: 1px solid #e7e0ff;
+      padding: 14px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(91, 73, 162, 0.12);
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: #595784;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .jobs {
+      display: grid;
+      gap: 10px;
+    }
+
+    .job {
+      border-radius: var(--radius-lg);
+      border: 1px solid #eadfff;
+      padding: 12px;
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      background: var(--purple);
+      color: #4d3f88;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .loader-wrap {
+      text-align: center;
+      padding: 16px 8px;
+    }
+
+    .loader {
+      width: 56px;
+      height: 56px;
+      border: 6px solid #f0e9ff;
+      border-top-color: #f6c364;
+      border-right-color: #8bc8ff;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .flow-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .flow-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #d3c8ff;
+      animation: pulse 1.2s ease infinite;
+    }
+
+    .flow-dots span:nth-child(2) { animation-delay: 0.15s; }
+    .flow-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.35; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .logo-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .logo-pill {
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #f0ebff;
+      color: #57469a;
+      font-weight: 700;
+      font-size: 0.84rem;
+    }
+
+    .analysis-sub {
+      transition: opacity 0.25s ease;
+    }
+
+    .skill-plan-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .skill-path-card {
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      border: 2px solid transparent;
+      transition: box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+      position: relative;
+    }
+
+    .skill-path-card.path-blue {
+      background: linear-gradient(180deg, #e9f4ff 0%, #fafcff 60%);
+      border-color: rgba(80, 150, 235, 0.35);
+    }
+
+    .skill-path-card.path-purple {
+      background: linear-gradient(180deg, #f0ebff 0%, #fcfaff 60%);
+      border-color: rgba(148, 120, 220, 0.4);
+    }
+
+    .skill-path-card.recommended {
+      box-shadow: 0 0 0 2px #5f53b8, 0 12px 28px rgba(95, 83, 184, 0.18);
+    }
+
+    .skill-path-card:not(.recommended).dimmed {
+      opacity: 0.72;
+      transform: scale(0.99);
+    }
+
+    .skill-path-card h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      line-height: 1.35;
+      color: #2d2848;
+    }
+
+    .recommended-pill {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #fff;
+      background: #5f53b8;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+
+    .path-list {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: #4f4a72;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .path-explain {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .toggle-row {
+      display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1rem 2.5rem;
-      font-family: inherit;
-      font-size: clamp(0.98rem, 2.4vw, 1.08rem);
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      color: #fff;
-      text-decoration: none;
-      border: none;
-      border-radius: 999px;
+      gap: 10px;
+      margin: 14px 0 10px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .switch {
+      position: relative;
+      width: 48px;
+      height: 26px;
+      flex-shrink: 0;
       cursor: pointer;
-      background: linear-gradient(180deg, var(--btn-top) 0%, var(--btn-mid) 38%, var(--welcome-purple) 72%, var(--btn-bottom) 100%);
-      box-shadow:
-        0 16px 36px var(--btn-shadow),
-        0 6px 14px rgba(91, 33, 182, 0.22),
-        0 0 0 1px rgba(255, 255, 255, 0.12) inset;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        filter 0.2s ease;
     }
 
-    .cta:hover {
-      transform: scale(1.04) translateY(-1px);
-      filter: brightness(1.05);
-      box-shadow:
-        0 20px 44px rgba(20, 66, 122, 0.42),
-        0 8px 18px rgba(20, 66, 122, 0.25),
-        0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
     }
 
-    .cta:focus-visible {
-      outline: 2px solid var(--welcome-purple-mid);
-      outline-offset: 4px;
+    .switch-slider {
+      position: absolute;
+      inset: 0;
+      background: #d8cfe8;
+      border-radius: 999px;
+      transition: background 0.2s ease;
     }
 
-    .cta:active {
-      transform: scale(1.02);
+    .switch-slider::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 3px;
+      top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      transition: transform 0.2s ease;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      body,
-      .top-bar,
-      .hero-wrap,
-      .cta-wrap {
-        animation: none !important;
-        opacity: 1 !important;
-        transform: none !important;
+    .switch input:checked + .switch-slider {
+      background: #8b81d9;
+    }
+
+    .switch input:checked + .switch-slider::after {
+      transform: translateX(22px);
+    }
+
+    details.why-expand {
+      margin-top: 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid #e3dcf5;
+      background: #faf8ff;
+      padding: 0 12px;
+    }
+
+    details.why-expand summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: #4f467b;
+      padding: 12px 0;
+      list-style: none;
+    }
+
+    details.why-expand summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.why-expand[open] summary {
+      padding-bottom: 8px;
+    }
+
+    .why-body {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.55;
+      padding-bottom: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .wizard {
+        padding: 18px;
       }
 
-      .cta:hover {
-        transform: none;
+      .grid,
+      .modules,
+      .skill-plan-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="top-bar">
-      <svg class="nyu-logo" viewBox="0 0 44 36" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NYU">
-        <title>NYU</title>
-        <rect width="44" height="36" rx="9" fill="var(--nyu-violet)"/>
-        <text
-          x="50%"
-          y="50%"
-          dominant-baseline="central"
-          text-anchor="middle"
-          fill="#fff"
-          font-family="Inter, system-ui, sans-serif"
-          font-size="13"
-          font-weight="700"
-          letter-spacing="0.04em"
-        >NYU</text>
-      </svg>
-      <span class="brand-name">Coop Venture</span>
+  <div class="wizard">
+    <header class="header">
+      <div class="progress-meta">
+        <span id="stepLabel">Step 1 of 7</span>
+        <span>Career Onboarding</span>
+      </div>
+      <div class="progress-track" aria-hidden="true">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
     </header>
 
-    <main class="main">
-      <div class="hero-wrap">
-        <h1 class="welcome">
-          Welcome
-          <span class="sparkle" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="26" cy="7" r="1.35" fill="var(--spark)"/>
-              <circle cx="28.5" cy="9.5" r="1" fill="var(--spark-hot)"/>
-              <path
-                d="M16 2.5l2.2 7.1 7.1 2.2-7.1 2.2L16 21.2l-2.2-7.2-7.1-2.2 7.1-2.2L16 2.5z"
-                fill="var(--spark-hot)"
-              />
-            </svg>
-          </span>
-        </h1>
-        <p class="welcome-subtitle">Industry-ready, before you apply</p>
+    <section class="step active" data-step="1">
+      <div class="step-shell theme-blue">
+        <h1>Create Your Account</h1>
+        <p class="subtitle">Set up your student profile to begin your guided journey.</p>
+        <div class="grid">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Enter your name">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input id="phone" type="tel" placeholder="(555) 555-1234">
+          </div>
+          <div class="field">
+            <label for="address">Address</label>
+            <input id="address" type="text" placeholder="City, State">
+          </div>
+        </div>
+        <div class="actions">
+          <span></span>
+          <button class="btn btn-primary next-btn" type="button">Next</button>
+        </div>
       </div>
-      <div class="cta-wrap">
-        <a class="cta" href="landing-page.html">Start Here</a>
+    </section>
+
+    <section class="step" data-step="2">
+      <div class="step-shell theme-yellow">
+        <h1>Tell Us About You</h1>
+        <p class="subtitle">Help us personalize your prep and opportunities.</p>
+        <div class="grid">
+          <div class="field">
+            <label for="school">School</label>
+            <input id="school" type="text" placeholder="Your school">
+          </div>
+          <div class="field">
+            <label for="year">Year</label>
+            <select id="year">
+              <option value="">Select year</option>
+              <option>Freshman</option>
+              <option>Sophomore</option>
+              <option>Junior</option>
+              <option>Senior</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="major">Major / Field of Study</label>
+            <input id="major" type="text" placeholder="Economics, Computer Science, etc.">
+          </div>
+          <div class="field full">
+            <label for="goals">Career Goals</label>
+            <textarea id="goals" placeholder="Share where you want to grow..."></textarea>
+          </div>
+        </div>
+
+        <div class="upload-box">
+          <label for="resumeBtn">Resume Section</label>
+          <input type="file" id="resumeFile" accept=".pdf,.doc,.docx" hidden aria-hidden="true">
+          <div class="actions" style="margin-top: 10px;">
+            <button id="resumeBtn" class="btn btn-ghost" type="button">Upload Resume</button>
+            <span class="small">Optional - you can skip this step</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-ghost skip-btn" type="button">Skip</button>
+          <button class="btn btn-primary next-btn" type="button">Next</button>
+        </div>
       </div>
-    </main>
+    </section>
+
+    <section class="step" data-step="3">
+      <div class="step-shell theme-yellow">
+        <h1>Analyzing Your Profile</h1>
+        <p class="subtitle analysis-sub" id="analysisSubtitle">We're analyzing your resume and responses to identify skill gaps and strengths.</p>
+        <div class="loader-wrap">
+          <div class="loader" aria-hidden="true"></div>
+          <div class="flow-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" data-step="4">
+      <div class="step-shell theme-yellow">
+        <h1>Your Personalized Skill Plan</h1>
+        <p class="subtitle">Here's what we recommend based on your answers and simulated resume insights.</p>
+
+        <div class="skill-plan-grid">
+          <article id="hardPathCard" class="skill-path-card path-blue" data-path="hard">
+            <span class="recommended-pill" id="hardPill" hidden>Suggested track</span>
+            <h2 id="hardHeader">You should focus on building technical skills</h2>
+            <ul id="hardList" class="path-list">
+              <li>Excel & Financial Modeling</li>
+              <li>Data Analysis (basic tools)</li>
+              <li>Industry-specific tools</li>
+            </ul>
+            <p id="hardExplain" class="path-explain">These skills will help you meet job requirements and stand out in applications.</p>
+          </article>
+          <article id="softPathCard" class="skill-path-card path-purple" data-path="soft">
+            <span class="recommended-pill" id="softPill" hidden>Suggested track</span>
+            <h2 id="softHeader">You should focus on strengthening soft skills</h2>
+            <ul id="softList" class="path-list">
+              <li>Mock Interviews</li>
+              <li>Networking &amp; Outreach</li>
+              <li>Personal Branding</li>
+            </ul>
+            <p id="softExplain" class="path-explain">You already have strong technical foundations—these skills will help you land offers.</p>
+          </article>
+        </div>
+
+        <div class="toggle-row">
+          <label class="switch" for="seeBothToggle" title="Compare both tracks">
+            <input type="checkbox" id="seeBothToggle" autocomplete="off">
+            <span class="switch-slider" aria-hidden="true"></span>
+          </label>
+          <label for="seeBothToggle" style="cursor:pointer;">See both paths</label>
+        </div>
+
+        <details class="why-expand" id="whyExpand">
+          <summary id="whySummary">Why this recommendation?</summary>
+          <div class="why-body" id="whyBody"></div>
+        </details>
+
+        <div class="actions">
+          <span></span>
+          <button class="btn btn-primary plan-start-btn" type="button">Start My Plan</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" data-step="5">
+      <div class="step-shell theme-orange">
+        <h1>Start Preparing</h1>
+        <p class="subtitle">Choose learning modules to strengthen your profile.</p>
+        <div class="modules">
+          <article class="card" tabindex="0">
+            <h3>Technical Skills</h3>
+            <ul class="list">
+              <li>Excel and financial modeling</li>
+              <li>Industry tools</li>
+              <li>Hands-on practice modules</li>
+            </ul>
+          </article>
+          <article class="card" tabindex="0">
+            <h3>Soft Skills</h3>
+            <ul class="list">
+              <li>Mock interviews</li>
+              <li>Networking strategies</li>
+              <li>Personal branding</li>
+            </ul>
+          </article>
+        </div>
+        <div class="actions">
+          <span></span>
+          <button class="btn btn-primary next-btn" type="button">Start Applying</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" data-step="6">
+      <div class="step-shell theme-orange">
+        <h1>Find Opportunities</h1>
+        <p class="subtitle">AI recommends jobs based on your profile.</p>
+        <div class="jobs">
+          <article class="job">
+            <div>
+              <strong>Financial Analyst Intern</strong><br>
+              <small>Atlas Capital</small>
+            </div>
+            <span class="tag">92% Match</span>
+          </article>
+          <article class="job">
+            <div>
+              <strong>Operations Strategy Intern</strong><br>
+              <small>BrightPath Logistics</small>
+            </div>
+            <span class="tag">88% Match</span>
+          </article>
+          <article class="job">
+            <div>
+              <strong>Product Data Intern</strong><br>
+              <small>Northstar Tech</small>
+            </div>
+            <span class="tag">85% Match</span>
+          </article>
+        </div>
+        <div class="actions">
+          <span></span>
+          <button class="btn btn-primary next-btn" type="button">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" data-step="7">
+      <div class="step-shell">
+        <h1>You're Matched!</h1>
+        <p class="subtitle">Your profile has been shared with top matching companies.</p>
+        <div class="logo-row">
+          <div class="logo-pill">Company A</div>
+          <div class="logo-pill">Company B</div>
+          <div class="logo-pill">Company C</div>
+        </div>
+        <div class="actions">
+          <span></span>
+          <button class="btn btn-primary" type="button">Finish</button>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <script>
+    const TECH_SIGNALS = [
+      "excel", "python", "sql", "java", "javascript", "typescript", "tableau", "power bi",
+      "powerbi", "stata", "matlab", "jupyter", "aws", "azure", "gcp", "kubernetes",
+      "docker", "modeling", "modelling", "machine learning", "deep learning",
+      "engineering", "software", "developer", "github", "api", "react", "pandas",
+      "numpy", "spark", "analytics", "c++", "cpp", ".net", "pandas", "r studio",
+      "jupyter", "data analysis", "sql server"
+    ];
+
+    const RESUME_SIM_RICH =
+      "\nexcel python sql data analysis internship projects modeling github analytics engineering";
+    const RESUME_SIM_THIN =
+      "\ncommunication leadership volunteer organizing events customer service teamwork";
+
+    const steps = Array.from(document.querySelectorAll(".step"));
+    const nextButtons = document.querySelectorAll(".next-btn");
+    const skipButtons = document.querySelectorAll(".skip-btn");
+    const stepLabel = document.getElementById("stepLabel");
+    const progressFill = document.getElementById("progressFill");
+    const resumeBtn = document.getElementById("resumeBtn");
+    const resumeFile = document.getElementById("resumeFile");
+    const analysisSubtitle = document.getElementById("analysisSubtitle");
+    const hardPathCard = document.getElementById("hardPathCard");
+    const softPathCard = document.getElementById("softPathCard");
+    const hardPill = document.getElementById("hardPill");
+    const softPill = document.getElementById("softPill");
+    const whyBody = document.getElementById("whyBody");
+    const seeBothToggle = document.getElementById("seeBothToggle");
+    const planStartButtons = document.querySelectorAll(".plan-start-btn");
+
+    let currentStep = 1;
+    let analyzeTimer = null;
+    /** @type {'soft'|'hard'} */
+    let recommendedPath = "hard";
+
+    function countTechSignals(text) {
+      if (!text) return 0;
+      const lowered = text.toLowerCase();
+      let count = 0;
+      TECH_SIGNALS.forEach((term) => {
+        if (lowered.includes(term)) count++;
+      });
+      return count;
+    }
+
+    function hasResumeAttached() {
+      return Boolean(resumeFile && resumeFile.files && resumeFile.files.length);
+    }
+
+    function questionnaireText() {
+      const major = document.getElementById("major").value || "";
+      const goals = document.getElementById("goals").value || "";
+      return `${major}\n${goals}`;
+    }
+
+    function getYearLabel() {
+      const sel = document.getElementById("year");
+      return sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text.trim() : "";
+    }
+
+    function computeSkillRecommendation() {
+      const yearLabel = getYearLabel();
+      const questionnaire = questionnaireText();
+      const resumeIncluded = hasResumeAttached();
+
+      const questionnaireScore = countTechSignals(questionnaire);
+      /** Chooses a richer OCR extract when questionnaires already convey technical maturity. */
+      const resumeSnippet = questionnaireScore >= 4 ? RESUME_SIM_RICH : RESUME_SIM_THIN;
+      const combinedScore = resumeIncluded
+        ? countTechSignals(`${questionnaire}\n${resumeSnippet}`)
+        : questionnaireScore;
+
+      const isAdvancedYear = yearLabel === "Junior" || yearLabel === "Senior";
+      const isEarlyYear =
+        yearLabel === "Freshman" ||
+        yearLabel === "Sophomore" ||
+        yearLabel === "" ||
+        yearLabel === "Select year";
+
+      const modeledResumeShowsTech =
+        resumeIncluded &&
+        resumeSnippet === RESUME_SIM_RICH &&
+        questionnaireScore >= 3 &&
+        combinedScore >= 7;
+      /** Resume anchor alone materially lifted technical keyword density versus goals text. */
+      const boostedResumeCue =
+        resumeIncluded && resumeSnippet === RESUME_SIM_RICH && combinedScore >= 8 && questionnaireScore < 5;
+      const modeledResumeLooksThin =
+        resumeIncluded && combinedScore < 6 && resumeSnippet === RESUME_SIM_THIN;
+      const questionnaireShowsTech = questionnaireScore >= 5;
+
+      if (isEarlyYear && !resumeIncluded && questionnaireScore < 4 && !questionnaireShowsTech) {
+        return {
+          path: "hard",
+          reasons: [
+            "Using your questionnaire responses to personalize recommendations—no resume on file.",
+            "Early coursework phases benefit strongest from repeatable tooling reps before refining pitch.",
+            questionnaire.trim().length === 0
+              ? "We picked up sparse keyword density in goals/major fields, so scaffolding leads."
+              : "Technical keyword density stays modest versus role templates we benchmark locally.",
+          ].filter(Boolean),
+          meta: {
+            yearLabel: yearLabel || "Not specified",
+            resumeIncluded,
+            questionnaireOnlyScore: questionnaireScore,
+            combinedScore,
+          },
+        };
+      }
+
+      if (isEarlyYear && resumeIncluded && modeledResumeLooksThin && !questionnaireShowsTech) {
+        return {
+          path: "hard",
+          reasons: [
+            "Simulated OCR weighted a lighter-skills silhouette from your uploaded file paired with thinner questionnaire cues.",
+            "Freshman/Sophomore windows still reward concrete technical ladders before layering presentation polish.",
+            "Once modeling and analysis habits feel automatic, we layer networking and interview lifts.",
+          ],
+          meta: {
+            yearLabel: yearLabel || "Not specified",
+            resumeIncluded,
+            questionnaireOnlyScore: questionnaireScore,
+            combinedScore,
+          },
+        };
+      }
+
+      if (
+        isAdvancedYear ||
+        questionnaireShowsTech ||
+        modeledResumeShowsTech ||
+        boostedResumeCue
+      ) {
+        return {
+          path: "soft",
+          reasons: [
+            isAdvancedYear ? "Junior/Senior cycles bias toward recruiter conversations and closing offers." : "",
+            questionnaireShowsTech
+              ? "Your goals/major wording already conveys technical footing—confidence and storytelling differentiate."
+              : "",
+            modeledResumeShowsTech
+              ? "Modeled extracts from your resume plus questionnaire inputs suggest practiced technical scaffolding."
+              : "",
+            boostedResumeCue && !modeledResumeShowsTech
+              ? "Even with lighter questionnaire text, modeled resume excerpts already show repeatable technical exposures."
+              : "",
+            questionnaire.trim().length === 0
+              ? "Even light inputs still align with softer-skill amplification when milestones are advanced."
+              : "",
+          ].filter(Boolean),
+          meta: {
+            yearLabel: yearLabel || "Not specified",
+            resumeIncluded,
+            questionnaireOnlyScore: questionnaireScore,
+            combinedScore,
+          },
+        };
+      }
+
+      return {
+        path: "hard",
+        reasons: [
+          resumeIncluded
+            ? "Synthetic resume clustering still skews foundational—there is runway before advanced polish dominates."
+            : "Questionnaire language still skews exploratory, so repeatable technical reps come first.",
+          isEarlyYear
+            ? "Early academic timelines pair well with spreadsheets, quantitative storytelling, and tool fluency."
+            : "We'll lock technical proof points before stressing networking velocity.",
+          "Soft-skill checkpoints stay queued so you revisit them immediately after leveling skills.",
+        ].filter(Boolean),
+        meta: {
+          yearLabel: yearLabel || "Not specified",
+          resumeIncluded,
+          questionnaireOnlyScore: questionnaireScore,
+          combinedScore,
+        },
+      };
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, (ch) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+      })[ch]);
+    }
+
+    function renderRecommendation(result) {
+      recommendedPath = result.path;
+      const showHard = recommendedPath === "hard";
+      hardPathCard.classList.toggle("recommended", showHard);
+      softPathCard.classList.toggle("recommended", !showHard);
+
+      hardPill.hidden = !showHard;
+      softPill.hidden = showHard;
+      hardPill.textContent = "Recommended path";
+      softPill.textContent = "Recommended path";
+
+      const bullets = [];
+      bullets.push("<strong>Signals we considered</strong>");
+      bullets.push(
+        `<ul style="margin:8px 0 0;padding-left:18px;">` +
+          `<li>${result.meta.resumeIncluded ? "Resume uploaded (demo parser)" : "No resume uploaded—questionnaire-only weighting"}</li>` +
+          `<li>${escapeHtml(result.meta.yearLabel || "Year not selected")}: ${
+            (result.meta.yearLabel || "").includes("Junior") ||
+            (result.meta.yearLabel || "").includes("Senior")
+              ? "advanced stage favors soft-skills amplification"
+              : "early stage prioritizes repeatable technical drills"
+          }</li>` +
+          `<li>Questionnaire keyword matches: ${result.meta.questionnaireOnlyScore}; combined modeled score ${
+            result.meta.combinedScore
+          } (includes simulated resume OCR when uploaded)</li>` +
+        `</ul>`
+      );
+
+      bullets.push("<strong>Narrative</strong>");
+      bullets.push("<p>" + result.reasons.map((r) => escapeHtml(r)).join(" ") + "</p>");
+
+      whyBody.innerHTML = bullets.join("");
+
+      const showBoth = seeBothToggle && seeBothToggle.checked;
+      applyRecommendationVisuals(showBoth);
+    }
+
+    function applyRecommendationVisuals(showBothPaths) {
+      if (showBothPaths) {
+        hardPathCard.classList.remove("dimmed");
+        softPathCard.classList.remove("dimmed");
+        return;
+      }
+      hardPathCard.classList.toggle("dimmed", recommendedPath === "soft");
+      softPathCard.classList.toggle("dimmed", recommendedPath === "hard");
+    }
+
+    function updateProgress() {
+      const total = steps.length;
+      const progress = (currentStep / total) * 100;
+      progressFill.style.width = progress + "%";
+      stepLabel.textContent = "Step " + currentStep + " of " + total;
+    }
+
+    function setAnalysisSubtitle() {
+      analysisSubtitle.textContent = hasResumeAttached()
+        ? "We're analyzing your resume and responses to identify skill gaps and strengths."
+        : "Using your questionnaire responses to personalize recommendations.";
+    }
+
+    function showStep(stepNumber) {
+      currentStep = stepNumber;
+      steps.forEach((step) => {
+        step.classList.toggle("active", Number(step.dataset.step) === stepNumber);
+      });
+      updateProgress();
+
+      if (analyzeTimer) {
+        clearTimeout(analyzeTimer);
+        analyzeTimer = null;
+      }
+
+      if (currentStep === 3) {
+        setAnalysisSubtitle();
+        analyzeTimer = setTimeout(() => showStep(4), 2650);
+      }
+
+      if (currentStep === 4) {
+        renderRecommendation(computeSkillRecommendation());
+      }
+    }
+
+    nextButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (currentStep < steps.length) {
+          showStep(currentStep + 1);
+        }
+      });
+    });
+
+    skipButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        resumeFile.value = "";
+        resumeBtn.textContent = "Upload Resume";
+        resumeBtn.disabled = false;
+        showStep(3);
+      });
+    });
+
+    resumeBtn.addEventListener("click", () => {
+      resumeFile.click();
+    });
+
+    resumeFile.addEventListener("change", () => {
+      if (hasResumeAttached()) {
+        const name = resumeFile.files[0].name || "resume file";
+        resumeBtn.textContent = "Resume added";
+        resumeBtn.disabled = true;
+        resumeBtn.setAttribute("aria-label", "Resume uploaded: " + name);
+      } else {
+        resumeBtn.textContent = "Upload Resume";
+        resumeBtn.disabled = false;
+      }
+    });
+
+    seeBothToggle.addEventListener("change", () => {
+      applyRecommendationVisuals(seeBothToggle.checked);
+    });
+
+    planStartButtons.forEach((btn) => {
+      btn.addEventListener("click", () => showStep(5));
+    });
+
+    showStep(1);
+  </script>
 </body>
 </html>

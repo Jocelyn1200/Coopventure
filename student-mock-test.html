@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Mock Test | The Coop Venture</title>
+  <style>
+    :root {
+      --text: #0f2f5f;
+      --muted: #2f5b8f;
+      --accent: #1f5ea8;
+      --border: #b8d5f2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: #d8e4f5;
+      color: var(--text);
+    }
+    .container {
+      width: min(1080px, 94%);
+      margin: 0 auto;
+      padding: 18px 0;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .title {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      background: #edf6ff;
+      color: var(--text);
+    }
+    .frame-wrap {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(116, 68, 196, 0.08);
+    }
+    iframe {
+      width: 100%;
+      min-height: calc(100dvh - 110px);
+      border: 0;
+      display: block;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="top">
+      <h1 class="title">Student Mock Test</h1>
+      <a class="btn" href="mock-test.html">Back to Mock Test Options</a>
+    </div>
+    <section class="frame-wrap">
+      <iframe src="index.html" title="Student Mock Test Flow"></iframe>
+    </section>
+  </main>
+</body>
+</html>

@@ -285,12 +285,12 @@
 
     .signup-section h2 {
       font-size: 2rem;
-      color: #6d28d9;
+      color: #1f5ea8;
     }
 
     .signup-section .section-intro {
       font-size: 1.08rem;
-      color: #7c3aed;
+      color: #0f2940;
       font-weight: 600;
     }
 
@@ -302,9 +302,9 @@
       margin: 14px 0 0;
       padding: 12px 14px;
       border-radius: 12px;
-      background: #f0e8ff;
-      border: 1px solid #dcc9ff;
-      color: #5b21b6;
+      background: #eaf4ff;
+      border: 1px solid #b8d5f2;
+      color: #134b89;
       font-size: 0.98rem;
       font-weight: 600;
       line-height: 1.45;
@@ -315,11 +315,81 @@
     }
 
     .mock-test-shell {
-      background: #f4eeff;
-      border: 1px solid var(--border);
+      background: #eaf4ff;
+      border: 1px solid #b8d5f2;
       border-radius: 16px;
       padding: 18px;
-      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12);
+      box-shadow: 0 8px 24px rgba(31, 94, 168, 0.12);
+    }
+
+    .mock-choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(240px, 320px));
+      justify-content: center;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .mock-choice-card {
+      background: #fff;
+      border: 1px solid #cce4fb;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 6px 20px rgba(31, 94, 168, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .mock-choice-card:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 12px 26px rgba(31, 94, 168, 0.14);
+    }
+
+    .company-mock-details {
+      margin-top: 2px;
+    }
+
+    .company-mock-details > summary {
+      list-style: none;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .company-mock-details > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .company-questions {
+      margin-top: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fcfaff;
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .company-q {
+      border: 1px solid #e3d6ff;
+      border-radius: 10px;
+      padding: 10px;
+      background: #fff;
+    }
+
+    .company-q p {
+      margin: 0 0 8px;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .company-q label {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 5px 0;
     }
 
     .role-grid {
@@ -344,7 +414,7 @@
     }
 
     .role-card.active {
-      border-color: #7c3aed;
+      border-color: #2563eb;
       background: #f4ebff;
     }
 
@@ -379,8 +449,8 @@
     }
 
     .option-btn.selected {
-      background: #7c3aed;
-      border-color: #7c3aed;
+      background: #2563eb;
+      border-color: #2563eb;
       color: #fff;
     }
 
@@ -402,7 +472,7 @@
     }
 
     .match-badge {
-      background: #7c3aed;
+      background: #2563eb;
       color: #fff;
       border-radius: 999px;
       padding: 6px 10px;
@@ -440,7 +510,7 @@
     .progress-bar {
       height: 100%;
       width: 0;
-      background: linear-gradient(90deg, #7c3aed, #a855f7);
+      background: linear-gradient(90deg, #2563eb, #a855f7);
       transition: width 0.35s ease;
     }
 
@@ -542,7 +612,7 @@
 
     .insight-select {
       border: 1px solid var(--border);
-      background: #f6f0ff;
+      background: #eaf4ff;
       color: var(--text);
       border-radius: 10px;
       padding: 8px 10px;
@@ -563,7 +633,7 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 14px;
-      box-shadow: 0 6px 20px rgba(116, 68, 196, 0.08);
+      box-shadow: 0 6px 20px rgba(31, 94, 168, 0.08);
     }
 
     .bar-row {
@@ -582,7 +652,7 @@
     .bar-track {
       height: 14px;
       border-radius: 999px;
-      background: #efe6ff;
+      background: #dfefff;
       overflow: hidden;
     }
 
@@ -590,7 +660,7 @@
       height: 100%;
       width: 0;
       border-radius: 999px;
-      background: linear-gradient(90deg, #ff6b4a, #ff9f40);
+      background: linear-gradient(90deg, #2563eb, #93c5fd);
       transition: width 0.85s cubic-bezier(.22,.61,.36,1);
     }
 
@@ -611,11 +681,11 @@
       width: 180px;
       height: 180px;
       border-radius: 50%;
-      background: conic-gradient(#d946ef 0deg, #d946ef 40deg, #8b5cf6 40deg, #8b5cf6 120deg, #7c3aed 120deg, #7c3aed 220deg, #4c1d95 220deg, #4c1d95 360deg);
+      background: conic-gradient(#93c5fd 0deg, #93c5fd 40deg, #60a5fa 40deg, #60a5fa 120deg, #2563eb 120deg, #2563eb 220deg, #1e3a8a 220deg, #1e3a8a 360deg);
       transform: scale(0.85);
       opacity: 0;
       transition: transform 0.7s ease, opacity 0.7s ease;
-      border: 8px solid #f9f5ff;
+      border: 8px solid #f0f8ff;
     }
 
     .pie.ready {
@@ -650,7 +720,7 @@
     }
 
     .metric {
-      background: #f9f5ff;
+      background: #eaf4ff;
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 14px;
@@ -660,7 +730,7 @@
     .metric-value {
       font-size: 2rem;
       font-weight: 800;
-      color: #7c3aed;
+      color: #1f5ea8;
       line-height: 1;
       margin-bottom: 6px;
     }
@@ -696,6 +766,7 @@
       .input-grid { grid-template-columns: 1fr; }
       .insights-grid { grid-template-columns: 1fr; }
       .stats-mini { grid-template-columns: 1fr; }
+      .mock-choice-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -708,7 +779,6 @@
       </div>
       <div class="nav-links">
         <a href="#" class="tab-link active-tab" data-tab="home">Home</a>
-        <a href="#" class="tab-link" data-tab="insights">Insights</a>
         <a href="#" class="tab-link" data-tab="mock">Mock Test</a>
         <a href="#" class="tab-link" data-tab="waitlist">Join Waitlist</a>
       </div>
@@ -727,7 +797,7 @@
           confidence-building from start to finish.
         </p>
         <div class="cta-row">
-          <a class="cta primary" href="#" data-go-tab="insights">Explore insights</a>
+          <a class="cta primary" href="#home-insights">Explore insights</a>
         </div>
       </div>
 
@@ -762,7 +832,7 @@
       </section>
 
       <section id="home-about" style="padding-top: 24px;">
-        <h2>Who this is for</h2>
+        <h2 style="margin-top: 0;">Who this is for</h2>
         <div class="card">
           <ul class="bullets">
             <li><strong>Primary:</strong> Undergraduate students in NYC, including international students.</li>
@@ -770,7 +840,63 @@
             <li><strong>Employers:</strong> Companies that want better-prepared entry-level candidates.</li>
           </ul>
         </div>
-        <h2 style="margin-top: 18px;">About us</h2>
+      </section>
+
+      <section id="home-insights" style="padding-top: 24px;">
+        <div class="insights-mount" data-insights-mount data-insights-mount-id="home">
+          <h2>Insights</h2>
+          <div class="insight-controls">
+            <label class="insight-label" for="major-filter-home">View by Major</label>
+            <select id="major-filter-home" class="insight-select major-filter-sync">
+              <option value="all">All Majors</option>
+              <option value="btm">BTM / Business and Technology Management</option>
+              <option value="cbe">CBE</option>
+              <option value="cs">Computer Science</option>
+              <option value="civil">Civil Engineering</option>
+              <option value="mot">Management of Technology</option>
+              <option value="ee">Electrical Engineering</option>
+              <option value="sw">Social Work</option>
+              <option value="math">Mathematics</option>
+              <option value="bf">Business Finance</option>
+              <option value="geo">Geoscience</option>
+              <option value="me">Mechanical Engineering</option>
+              <option value="phi">Public Health &amp; Integrative Biology</option>
+            </select>
+          </div>
+
+          <div class="insights-grid">
+            <div class="chart-card">
+              <h3>Top Struggles</h3>
+              <div data-role="bars-wrap"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Applications Per Week</h3>
+              <div class="pie-wrap">
+                <div class="pie" data-role="pie-chart" aria-label="Applications per week pie chart"></div>
+                <div class="legend" data-role="pie-legend"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-mini">
+            <div class="metric">
+              <div class="metric-value" data-role="counter-stop">0%</div>
+              <div class="metric-label">Stopped applications halfway</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value" data-role="counter-confidence">0.0</div>
+              <div class="metric-label">Average confidence level</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value" data-role="counter-feature">--</div>
+              <div class="metric-label">Most requested feature</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="home-about-continued" style="padding-top: 24px;">
+        <h2>About us</h2>
         <div class="card">
           <p>
             The Coop Venture is an early-stage AI-powered career platform focused on helping students
@@ -781,83 +907,24 @@
       </section>
     </section>
 
-    <section id="insights" class="tab-panel" data-panel="insights">
-      <h2>Insights</h2>
-      <div class="insight-controls">
-        <label class="insight-label" for="major-filter">View by Major</label>
-        <select id="major-filter" class="insight-select">
-          <option value="all">All Majors</option>
-          <option value="btm">BTM / Business and Technology Management</option>
-          <option value="cbe">CBE</option>
-          <option value="cs">Computer Science</option>
-          <option value="civil">Civil Engineering</option>
-          <option value="mot">Management of Technology</option>
-          <option value="ee">Electrical Engineering</option>
-          <option value="sw">Social Work</option>
-          <option value="math">Mathematics</option>
-          <option value="bf">Business Finance</option>
-          <option value="geo">Geoscience</option>
-          <option value="me">Mechanical Engineering</option>
-          <option value="phi">Public Health &amp; Integrative Biology</option>
-        </select>
-      </div>
-
-      <div class="insights-grid">
-        <div class="chart-card">
-          <h3>Top Struggles</h3>
-          <div id="bars-wrap"></div>
-        </div>
-        <div class="chart-card">
-          <h3>Applications Per Week</h3>
-          <div class="pie-wrap">
-            <div class="pie" id="pie-chart" aria-label="Applications per week pie chart"></div>
-            <div class="legend" id="pie-legend"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="stats-mini">
-        <div class="metric">
-          <div class="metric-value" id="counter-stop">0%</div>
-          <div class="metric-label">Stopped applications halfway</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value" id="counter-confidence">0.0</div>
-          <div class="metric-label">Average confidence level</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value" id="counter-feature">--</div>
-          <div class="metric-label">Most requested feature</div>
-        </div>
-      </div>
-    </section>
-
     <section id="mock-test" class="tab-panel" data-panel="mock">
-      <h2>Mock Test</h2>
+      <h2>Choose Your Mock Test</h2>
       <p class="section-intro">
-        Try an interactive demo flow by selecting your role.
+        Pick a path to test your onboarding and recommendation experience.
       </p>
       <div class="mock-test-shell">
-        <div class="role-grid">
-          <div class="role-card active" data-role="student">
-            <h3>Student</h3>
-            <p class="label">5-step flow: sign up to AI recommendations.</p>
-          </div>
-          <div class="role-card" data-role="company">
-            <h3>Company</h3>
-            <p class="label">5-step hiring questionnaire with tailored summary.</p>
-          </div>
-          <div class="role-card" data-role="university">
-            <h3>University</h3>
-            <p class="label">7-step readiness questionnaire with tailored summary.</p>
-          </div>
+        <div class="mock-choice-grid">
+          <article class="mock-choice-card">
+            <h3>Students</h3>
+            <p class="label">Test the student onboarding and career recommendation experience.</p>
+            <a class="cta primary" href="student-mock-test.html">Start Student Mock Test</a>
+          </article>
+          <article class="mock-choice-card">
+            <h3>Companies</h3>
+            <p class="label">Test the employer onboarding and candidate matching experience.</p>
+            <a class="cta primary" href="company-mock-test.html">Start Company Mock Test</a>
+          </article>
         </div>
-
-        <div class="step-count" id="step-count">Step 1 of 5</div>
-        <div class="progress">
-          <div class="progress-bar" id="progress-bar"></div>
-        </div>
-        <div class="flow-view" id="flow-view"></div>
       </div>
     </section>
 
@@ -897,10 +964,10 @@
           { label: "Resume issues", value: 30 }
         ],
         applications: [
-          { label: "0-2", value: 22, color: "#d946ef" },
-          { label: "3-5", value: 26, color: "#8b5cf6" },
-          { label: "6-10", value: 26, color: "#7c3aed" },
-          { label: "10+", value: 26, color: "#4c1d95" }
+          { label: "0-2", value: 22, color: "#93c5fd" },
+          { label: "3-5", value: 26, color: "#60a5fa" },
+          { label: "6-10", value: 26, color: "#2563eb" },
+          { label: "10+", value: 26, color: "#1e3a8a" }
         ],
         stopped: 78,
         confidence: 6.2,
@@ -914,10 +981,10 @@
           { label: "Resume issues", value: 25 }
         ],
         applications: [
-          { label: "0-2", value: 0, color: "#d946ef" },
-          { label: "3-5", value: 17, color: "#8b5cf6" },
-          { label: "6-10", value: 50, color: "#7c3aed" },
-          { label: "10+", value: 33, color: "#4c1d95" }
+          { label: "0-2", value: 0, color: "#93c5fd" },
+          { label: "3-5", value: 17, color: "#60a5fa" },
+          { label: "6-10", value: 50, color: "#2563eb" },
+          { label: "10+", value: 33, color: "#1e3a8a" }
         ],
         stopped: 83,
         confidence: 4.7,
@@ -931,10 +998,10 @@
           { label: "Resume issues", value: 20 }
         ],
         applications: [
-          { label: "0-2", value: 40, color: "#d946ef" },
-          { label: "3-5", value: 20, color: "#8b5cf6" },
-          { label: "6-10", value: 20, color: "#7c3aed" },
-          { label: "10+", value: 20, color: "#4c1d95" }
+          { label: "0-2", value: 40, color: "#93c5fd" },
+          { label: "3-5", value: 20, color: "#60a5fa" },
+          { label: "6-10", value: 20, color: "#2563eb" },
+          { label: "10+", value: 20, color: "#1e3a8a" }
         ],
         stopped: 60,
         confidence: 4.8,
@@ -948,10 +1015,10 @@
           { label: "Resume issues", value: 50 }
         ],
         applications: [
-          { label: "0-2", value: 0, color: "#d946ef" },
-          { label: "3-5", value: 50, color: "#8b5cf6" },
-          { label: "6-10", value: 0, color: "#7c3aed" },
-          { label: "10+", value: 50, color: "#4c1d95" }
+          { label: "0-2", value: 0, color: "#93c5fd" },
+          { label: "3-5", value: 50, color: "#60a5fa" },
+          { label: "6-10", value: 0, color: "#2563eb" },
+          { label: "10+", value: 50, color: "#1e3a8a" }
         ],
         stopped: 100,
         confidence: 7.0,
@@ -965,10 +1032,10 @@
           { label: "Resume issues", value: 50 }
         ],
         applications: [
-          { label: "0-2", value: 0, color: "#d946ef" },
-          { label: "3-5", value: 50, color: "#8b5cf6" },
-          { label: "6-10", value: 50, color: "#7c3aed" },
-          { label: "10+", value: 0, color: "#4c1d95" }
+          { label: "0-2", value: 0, color: "#93c5fd" },
+          { label: "3-5", value: 50, color: "#60a5fa" },
+          { label: "6-10", value: 50, color: "#2563eb" },
+          { label: "10+", value: 0, color: "#1e3a8a" }
         ],
         stopped: 100,
         confidence: 6.5,
@@ -982,10 +1049,10 @@
           { label: "Resume issues", value: 100 }
         ],
         applications: [
-          { label: "0-2", value: 0, color: "#d946ef" },
-          { label: "3-5", value: 50, color: "#8b5cf6" },
-          { label: "6-10", value: 0, color: "#7c3aed" },
-          { label: "10+", value: 50, color: "#4c1d95" }
+          { label: "0-2", value: 0, color: "#93c5fd" },
+          { label: "3-5", value: 50, color: "#60a5fa" },
+          { label: "6-10", value: 0, color: "#2563eb" },
+          { label: "10+", value: 50, color: "#1e3a8a" }
         ],
         stopped: 50,
         confidence: 8.0,
@@ -999,10 +1066,10 @@
           { label: "Resume issues", value: 0 }
         ],
         applications: [
-          { label: "0-2", value: 0, color: "#d946ef" },
-          { label: "3-5", value: 100, color: "#8b5cf6" },
-          { label: "6-10", value: 0, color: "#7c3aed" },
-          { label: "10+", value: 0, color: "#4c1d95" }
+          { label: "0-2", value: 0, color: "#93c5fd" },
+          { label: "3-5", value: 100, color: "#60a5fa" },
+          { label: "6-10", value: 0, color: "#2563eb" },
+          { label: "10+", value: 0, color: "#1e3a8a" }
         ],
         stopped: 100,
         confidence: 6.0,
@@ -1016,10 +1083,10 @@
           { label: "Resume issues", value: 100 }
         ],
         applications: [
-          { label: "0-2", value: 100, color: "#d946ef" },
-          { label: "3-5", value: 0, color: "#8b5cf6" },
-          { label: "6-10", value: 0, color: "#7c3aed" },
-          { label: "10+", value: 0, color: "#4c1d95" }
+          { label: "0-2", value: 100, color: "#93c5fd" },
+          { label: "3-5", value: 0, color: "#60a5fa" },
+          { label: "6-10", value: 0, color: "#2563eb" },
+          { label: "10+", value: 0, color: "#1e3a8a" }
         ],
         stopped: 100,
         confidence: 7.0,
@@ -1033,10 +1100,10 @@
           { label: "Resume issues", value: 0 }
         ],
         applications: [
-          { label: "0-2", value: 0, color: "#d946ef" },
-          { label: "3-5", value: 100, color: "#8b5cf6" },
-          { label: "6-10", value: 0, color: "#7c3aed" },
-          { label: "10+", value: 0, color: "#4c1d95" }
+          { label: "0-2", value: 0, color: "#93c5fd" },
+          { label: "3-5", value: 100, color: "#60a5fa" },
+          { label: "6-10", value: 0, color: "#2563eb" },
+          { label: "10+", value: 0, color: "#1e3a8a" }
         ],
         stopped: 100,
         confidence: 6.0,
@@ -1050,10 +1117,10 @@
           { label: "Resume issues", value: 0 }
         ],
         applications: [
-          { label: "0-2", value: 100, color: "#d946ef" },
-          { label: "3-5", value: 0, color: "#8b5cf6" },
-          { label: "6-10", value: 0, color: "#7c3aed" },
-          { label: "10+", value: 0, color: "#4c1d95" }
+          { label: "0-2", value: 100, color: "#93c5fd" },
+          { label: "3-5", value: 0, color: "#60a5fa" },
+          { label: "6-10", value: 0, color: "#2563eb" },
+          { label: "10+", value: 0, color: "#1e3a8a" }
         ],
         stopped: 0,
         confidence: 4.0,
@@ -1067,10 +1134,10 @@
           { label: "Resume issues", value: 100 }
         ],
         applications: [
-          { label: "0-2", value: 100, color: "#d946ef" },
-          { label: "3-5", value: 0, color: "#8b5cf6" },
-          { label: "6-10", value: 0, color: "#7c3aed" },
-          { label: "10+", value: 0, color: "#4c1d95" }
+          { label: "0-2", value: 100, color: "#93c5fd" },
+          { label: "3-5", value: 0, color: "#60a5fa" },
+          { label: "6-10", value: 0, color: "#2563eb" },
+          { label: "10+", value: 0, color: "#1e3a8a" }
         ],
         stopped: 100,
         confidence: 5.0,
@@ -1084,10 +1151,10 @@
           { label: "Resume issues", value: 100 }
         ],
         applications: [
-          { label: "0-2", value: 100, color: "#d946ef" },
-          { label: "3-5", value: 0, color: "#8b5cf6" },
-          { label: "6-10", value: 0, color: "#7c3aed" },
-          { label: "10+", value: 0, color: "#4c1d95" }
+          { label: "0-2", value: 100, color: "#93c5fd" },
+          { label: "3-5", value: 0, color: "#60a5fa" },
+          { label: "6-10", value: 0, color: "#2563eb" },
+          { label: "10+", value: 0, color: "#1e3a8a" }
         ],
         stopped: 100,
         confidence: 7.0,
@@ -1101,10 +1168,10 @@
           { label: "Resume issues", value: 0 }
         ],
         applications: [
-          { label: "0-2", value: 100, color: "#d946ef" },
-          { label: "3-5", value: 0, color: "#8b5cf6" },
-          { label: "6-10", value: 0, color: "#7c3aed" },
-          { label: "10+", value: 0, color: "#4c1d95" }
+          { label: "0-2", value: 100, color: "#93c5fd" },
+          { label: "3-5", value: 0, color: "#60a5fa" },
+          { label: "6-10", value: 0, color: "#2563eb" },
+          { label: "10+", value: 0, color: "#1e3a8a" }
         ],
         stopped: 100,
         confidence: 7.0,
@@ -1379,13 +1446,9 @@
     const stepCount = document.getElementById("step-count");
     const progressBar = document.getElementById("progress-bar");
     const flowView = document.getElementById("flow-view");
-    const majorFilter = document.getElementById("major-filter");
-    const barsWrap = document.getElementById("bars-wrap");
-    const pieChart = document.getElementById("pie-chart");
-    const pieLegend = document.getElementById("pie-legend");
-    const stopCounter = document.getElementById("counter-stop");
-    const confidenceCounter = document.getElementById("counter-confidence");
-    const featureCounter = document.getElementById("counter-feature");
+    function insightMounts() {
+      return Array.from(document.querySelectorAll("[data-insights-mount]"));
+    }
 
     function setActiveTab(tabName) {
       tabLinks.forEach((link) => {
@@ -1413,8 +1476,10 @@
       requestAnimationFrame(frame);
     }
 
-    function renderBars(data) {
-      barsWrap.innerHTML = data.map((item) => `
+    function renderBars(mount, struggles) {
+      const barsWrap = mount.querySelector('[data-role="bars-wrap"]');
+      if (!barsWrap) return;
+      barsWrap.innerHTML = struggles.map((item) => `
         <div class="bar-row" title="${item.value}%">
           <div class="bar-label">
             <span>${item.label}</span>
@@ -1427,16 +1492,19 @@
       `).join("");
 
       requestAnimationFrame(() => {
-        document.querySelectorAll(".bar-fill").forEach((bar) => {
+        barsWrap.querySelectorAll(".bar-fill").forEach((bar) => {
           bar.style.width = `${bar.dataset.target}%`;
         });
       });
     }
 
-    function renderPie(data) {
+    function renderPie(mount, slices) {
+      const pieChart = mount.querySelector('[data-role="pie-chart"]');
+      const pieLegend = mount.querySelector('[data-role="pie-legend"]');
+      if (!pieChart || !pieLegend) return;
       let cumulative = 0;
       const stops = [];
-      data.forEach((slice) => {
+      slices.forEach((slice) => {
         const start = cumulative * 3.6;
         cumulative += slice.value;
         const end = cumulative * 3.6;
@@ -1445,7 +1513,7 @@
       pieChart.classList.remove("ready");
       pieChart.style.background = `conic-gradient(${stops.join(", ")})`;
 
-      pieLegend.innerHTML = data.map((slice) => `
+      pieLegend.innerHTML = slices.map((slice) => `
         <div class="legend-item" title="${slice.label}: ${slice.value}%">
           <span class="legend-dot" style="background:${slice.color}"></span>
           <span>${slice.label} <strong>${slice.value}%</strong></span>
@@ -1457,11 +1525,16 @@
 
     function renderInsights() {
       const data = insightData[activeInsight];
-      renderBars(data.struggles);
-      renderPie(data.applications);
-      animateCounter(stopCounter, data.stopped, "%", 0);
-      animateCounter(confidenceCounter, data.confidence, "", 1);
-      featureCounter.textContent = data.feature;
+      insightMounts().forEach((mount) => {
+        renderBars(mount, data.struggles);
+        renderPie(mount, data.applications);
+        const stopCounter = mount.querySelector('[data-role="counter-stop"]');
+        const confidenceCounter = mount.querySelector('[data-role="counter-confidence"]');
+        const featureCounter = mount.querySelector('[data-role="counter-feature"]');
+        if (stopCounter) animateCounter(stopCounter, data.stopped, "%", 0);
+        if (confidenceCounter) animateCounter(confidenceCounter, data.confidence, "", 1);
+        if (featureCounter) featureCounter.textContent = data.feature;
+      });
     }
 
     function getRoleAnswers() {
@@ -1781,9 +1854,16 @@
       });
     });
 
-    majorFilter.addEventListener("change", (e) => {
-      activeInsight = e.target.value;
-      renderInsights();
+    document.querySelectorAll(".major-filter-sync").forEach((sel) => {
+      sel.value = activeInsight;
+      sel.addEventListener("change", (e) => {
+        const next = e.target.value;
+        activeInsight = next;
+        document.querySelectorAll(".major-filter-sync").forEach((s) => {
+          if (s !== e.target) s.value = next;
+        });
+        renderInsights();
+      });
     });
 
     tabLinks.forEach((link) => {
@@ -1811,7 +1891,9 @@
     }
 
     renderInsights();
-    renderStep();
+    if (flowView && stepCount && progressBar) {
+      renderStep();
+    }
   </script>
 </body>
 </html>

@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Mock Test | The Coop Venture</title>
+  <style>
+    :root {
+      --bg: #f4efff;
+      --card: #ffffff;
+      --text: #0f2f5f;
+      --muted: #2f5b8f;
+      --accent: #1f5ea8;
+      --violet: #7c3aed;
+      --border: #cfc3f5;
+      --blue-soft: #eaf4ff;
+      --violet-soft: #f3edff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: #d8e4f5;
+      color: var(--text);
+      position: relative;
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(245, 250, 255, 0.3) 0%, rgba(221, 232, 248, 0.45) 100%),
+        url("assets/index-bg.png") center / cover no-repeat;
+      filter: contrast(1.17) saturate(1.12) brightness(1.03);
+      opacity: 0.98;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 50% 18%, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0) 56%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(120, 148, 187, 0.18) 100%);
+    }
+
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+    .container {
+      width: min(760px, 100%);
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .title {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      background: #edf6ff;
+      color: var(--text);
+      cursor: pointer;
+      font: inherit;
+    }
+    .btn.primary {
+      background: linear-gradient(90deg, #1f5ea8 0%, #7c3aed 100%);
+      color: #fff;
+      border-color: #225792;
+    }
+    .btn.primary:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+    .frame-wrap {
+      background: var(--card);
+      border: 1px solid rgba(129, 118, 192, 0.18);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(74, 57, 119, 0.12);
+    }
+    .inner {
+      padding: 24px;
+      background: linear-gradient(180deg, #eaf4ff 0%, #ffffff 100%);
+    }
+    h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.45rem, 4.2vw, 2rem);
+    }
+    .intro {
+      margin: 0 0 18px;
+      color: var(--muted);
+      max-width: 66ch;
+    }
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .field {
+      background: #fff;
+      border: 1px solid rgba(129, 118, 192, 0.16);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .field h3 {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+    }
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .full {
+      grid-column: 1 / -1;
+    }
+    .demo-input,
+    .demo-select,
+    .demo-textarea {
+      width: 100%;
+      border: 1px solid #d7d0f8;
+      border-radius: 12px;
+      padding: 10px;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+    }
+    .demo-textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+    .choice-grid {
+      display: grid;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .choice {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .choice input {
+      accent-color: var(--violet);
+    }
+    .loading,
+    .results {
+      display: none;
+    }
+    .loading.active,
+    .results.active {
+      display: block;
+    }
+    .loading {
+      text-align: center;
+      padding: 36px 14px;
+      border-radius: 12px;
+      border: 1px solid #b8d5f2;
+      background: linear-gradient(180deg, #eaf4ff, #fff);
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #e6ddff;
+      border-top-color: var(--violet);
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .recommend-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .recommend-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: var(--violet-soft);
+    }
+    .recommend-card.blue {
+      background: var(--blue-soft);
+      border-color: #b9d8ff;
+    }
+    .recommend-card h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #2c2354;
+    }
+    .recommend-card ul {
+      margin: 0 0 8px;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .candidate-grid {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    .candidate {
+      border: 1px solid #d8cdf9;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(116, 68, 196, 0.08);
+    }
+    .candidate p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .match {
+      display: inline-block;
+      margin-top: 6px;
+      background: #efe8ff;
+      color: #5b21b6;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 700px) {
+      .input-grid { grid-template-columns: 1fr; }
+      .recommend-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="top">
+      <h1 class="title">Company Mock Test</h1>
+      <a class="btn" href="landing-page.html">Back to Mock Test Options</a>
+    </div>
+    <section class="frame-wrap">
+      <div class="inner">
+        <h2>Tell Us What Your Company Needs</h2>
+        <p class="intro">Answer a few questions so we can recommend the best student candidates for your roles.</p>
+
+        <form id="company-form" class="form-grid">
+          <div class="field">
+            <h3>Company Name</h3>
+            <input class="demo-input" id="companyName" type="text" required>
+          </div>
+
+          <div class="field input-grid">
+            <div>
+              <h3>What type of role are you hiring for?</h3>
+              <select class="demo-select" id="roleType" required>
+                <option value="">Select</option>
+                <option>Internship</option>
+                <option>Part-time</option>
+                <option>Full-time</option>
+                <option>Project-based role</option>
+              </select>
+            </div>
+            <div>
+              <h3>What term are you hiring for?</h3>
+              <select class="demo-select" id="term" required>
+                <option value="">Select</option>
+                <option>Summer</option>
+                <option>Fall</option>
+                <option>Spring</option>
+                <option>Winter</option>
+                <option>Immediate start</option>
+              </select>
+            </div>
+            <div class="full">
+              <h3>What positions are you looking to fill?</h3>
+              <input class="demo-input" id="positions" type="text" placeholder="Finance intern, data analyst, marketing assistant" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <h3>What skills are most important for this role?</h3>
+            <div class="choice-grid">
+              <label class="choice"><input type="checkbox" name="skills" value="Excel"> Excel</label>
+              <label class="choice"><input type="checkbox" name="skills" value="Financial modeling"> Financial modeling</label>
+              <label class="choice"><input type="checkbox" name="skills" value="Python"> Python</label>
+              <label class="choice"><input type="checkbox" name="skills" value="SQL"> SQL</label>
+              <label class="choice"><input type="checkbox" name="skills" value="Data analysis"> Data analysis</label>
+              <label class="choice"><input type="checkbox" name="skills" value="Communication"> Communication</label>
+              <label class="choice"><input type="checkbox" name="skills" value="Leadership"> Leadership</label>
+              <label class="choice"><input type="checkbox" name="skills" value="Teamwork"> Teamwork</label>
+              <label class="choice"><input type="checkbox" name="skills" value="Research"> Research</label>
+              <label class="choice"><input type="checkbox" name="skills" value="Presentation skills"> Presentation skills</label>
+            </div>
+          </div>
+
+          <div class="field input-grid">
+            <div class="full">
+              <h3>What majors or fields of study do you prefer?</h3>
+              <input class="demo-input" id="majors" type="text" placeholder="Business, Finance, Computer Science, Engineering" required>
+            </div>
+            <div>
+              <h3>What experience level are you looking for?</h3>
+              <select class="demo-select" id="experience" required>
+                <option value="">Select</option>
+                <option>No experience required</option>
+                <option>Some coursework/projects</option>
+                <option>Internship experience preferred</option>
+                <option>Strong technical experience preferred</option>
+              </select>
+            </div>
+            <div>
+              <h3>What matters most in a candidate?</h3>
+              <div class="choice-grid">
+                <label class="choice"><input type="radio" name="priority" value="Technical skills" required> Technical skills</label>
+                <label class="choice"><input type="radio" name="priority" value="Soft skills"> Soft skills</label>
+                <label class="choice"><input type="radio" name="priority" value="Previous experience"> Previous experience</label>
+                <label class="choice"><input type="radio" name="priority" value="Willingness to learn"> Willingness to learn</label>
+                <label class="choice"><input type="radio" name="priority" value="Culture fit"> Culture fit</label>
+              </div>
+            </div>
+            <div class="full">
+              <h3>Describe your ideal candidate</h3>
+              <textarea class="demo-textarea" id="ideal" required></textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn primary">Find My Candidates</button>
+          </div>
+        </form>
+
+        <section id="loading" class="loading" aria-live="polite">
+          <div class="spinner" aria-hidden="true"></div>
+          <p>We're analyzing your responses and identifying the best-fit candidates...</p>
+        </section>
+
+        <section id="results" class="results">
+          <h3>Based on your responses, we recommend:</h3>
+          <div class="recommend-grid">
+            <article id="techCard" class="recommend-card blue">
+              <h4>Technical Candidates (Hard Skills Focus)</h4>
+              <ul>
+                <li>Strong technical experience</li>
+                <li>Proficiency in tools (Excel, Python, etc.)</li>
+                <li>Relevant coursework or projects</li>
+              </ul>
+              <p>These candidates can contribute immediately to role-specific tasks.</p>
+            </article>
+            <article id="softCard" class="recommend-card">
+              <h4>Well-Rounded Candidates (Soft Skills Focus)</h4>
+              <ul>
+                <li>Strong communication</li>
+                <li>Leadership and teamwork</li>
+                <li>Adaptability and growth mindset</li>
+              </ul>
+              <p>These candidates are flexible and can grow within your organization.</p>
+            </article>
+          </div>
+
+          <h3 style="margin-top:16px;">Candidate Matches</h3>
+          <div id="candidates" class="candidate-grid"></div>
+
+          <div class="actions">
+            <button type="button" class="btn primary">View Top Matches</button>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("company-form");
+    const loading = document.getElementById("loading");
+    const results = document.getElementById("results");
+    const techCard = document.getElementById("techCard");
+    const softCard = document.getElementById("softCard");
+    const candidatesWrap = document.getElementById("candidates");
+
+    function getSkills() {
+      return Array.from(document.querySelectorAll('input[name="skills"]:checked')).map((el) => el.value);
+    }
+
+    function isTechnicalProfile(data) {
+      const technicalSkills = ["Excel", "Financial modeling", "Python", "SQL", "Data analysis", "Research"];
+      const techHits = data.skills.filter((s) => technicalSkills.includes(s)).length;
+      const technicalRole = ["Internship", "Full-time", "Project-based role"].includes(data.roleType);
+      const technicalPriority = data.priority === "Technical skills" || data.priority === "Previous experience";
+      const technicalExperience = data.experience === "Strong technical experience preferred";
+      return techHits >= 2 || technicalRole || technicalPriority || technicalExperience;
+    }
+
+    function renderCandidates(technical) {
+      const sample = technical
+        ? [
+            { name: "Maya Chen", school: "NYU", major: "Business & Technology Management", skills: "Excel, SQL, Data Analysis", match: "94%" },
+            { name: "Arjun Patel", school: "Baruch", major: "Finance", skills: "Financial Modeling, Research, Presentation", match: "91%" },
+            { name: "Sofia Kim", school: "Columbia", major: "Computer Science", skills: "Python, SQL, Teamwork", match: "89%" }
+          ]
+        : [
+            { name: "Avery Brooks", school: "NYU", major: "Management of Technology", skills: "Communication, Leadership, Teamwork", match: "93%" },
+            { name: "Jordan Lee", school: "Pace", major: "Marketing", skills: "Presentation, Adaptability, Research", match: "90%" },
+            { name: "Noah Rivera", school: "Fordham", major: "Business", skills: "Culture Fit, Willingness to Learn, Teamwork", match: "88%" }
+          ];
+
+      candidatesWrap.innerHTML = sample.map((c) => `
+        <article class="candidate">
+          <strong>${c.name}</strong>
+          <p>${c.major} / ${c.school}</p>
+          <p><strong>Key Skills:</strong> ${c.skills}</p>
+          <span class="match">${c.match} Match</span>
+        </article>
+      `).join("");
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const data = {
+        companyName: document.getElementById("companyName").value.trim(),
+        roleType: document.getElementById("roleType").value,
+        term: document.getElementById("term").value,
+        positions: document.getElementById("positions").value.trim(),
+        skills: getSkills(),
+        majors: document.getElementById("majors").value.trim(),
+        experience: document.getElementById("experience").value,
+        priority: document.querySelector('input[name="priority"]:checked')?.value || "",
+        ideal: document.getElementById("ideal").value.trim()
+      };
+
+      if (data.skills.length === 0) {
+        alert("Please select at least one skill.");
+        return;
+      }
+
+      form.style.display = "none";
+      loading.classList.add("active");
+
+      setTimeout(() => {
+        const technical = isTechnicalProfile(data);
+
+        techCard.style.outline = technical ? "2px solid #5b21b6" : "none";
+        softCard.style.outline = technical ? "none" : "2px solid #5b21b6";
+        techCard.style.opacity = technical ? "1" : "0.72";
+        softCard.style.opacity = technical ? "0.72" : "1";
+
+        renderCandidates(technical);
+        loading.classList.remove("active");
+        results.classList.add("active");
+      }, 2200);
+    });
+  </script>
+</body>
+</html>
