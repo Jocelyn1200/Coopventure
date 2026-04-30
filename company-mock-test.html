@@ -113,10 +113,42 @@
       color: var(--muted);
       max-width: 66ch;
     }
-    .form-grid {
+    .progress-meta {
       display: flex;
-      flex-direction: column;
-      gap: 14px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .progress-track {
+      height: 10px;
+      border-radius: 999px;
+      background: #dfefff;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .progress-fill {
+      width: 16.6%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #60a5fa 0%, #1f5ea8 100%);
+      transition: width 0.35s ease;
+    }
+    .form-grid {
+      display: block;
+    }
+    .step {
+      display: none;
+      animation: fadeIn 0.22s ease;
+    }
+    .step.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .field {
       background: #fff;
@@ -252,6 +284,9 @@
       gap: 8px;
       flex-wrap: wrap;
     }
+    .actions .spacer {
+      flex: 1;
+    }
     @media (max-width: 700px) {
       .input-grid { grid-template-columns: 1fr; }
       .recommend-grid { grid-template-columns: 1fr; }
@@ -269,13 +304,24 @@
         <h2>Tell Us What Your Company Needs</h2>
         <p class="intro">Answer a few questions so we can recommend the best student candidates for your roles.</p>
 
+        <div class="progress-meta">
+          <span id="stepLabel">Step 1 of 6</span>
+          <span>Company onboarding</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
         <form id="company-form" class="form-grid">
-          <div class="field">
+          <section class="step active" data-step="1">
+            <div class="field">
             <h3>Company Name</h3>
             <input class="demo-input" id="companyName" type="text" required>
-          </div>
+            </div>
+          </section>
 
-          <div class="field input-grid">
+          <section class="step" data-step="2">
+            <div class="field input-grid">
             <div>
               <h3>What type of role are you hiring for?</h3>
               <select class="demo-select" id="roleType" required>
@@ -301,9 +347,11 @@
               <h3>What positions are you looking to fill?</h3>
               <input class="demo-input" id="positions" type="text" placeholder="Finance intern, data analyst, marketing assistant" required>
             </div>
-          </div>
+            </div>
+          </section>
 
-          <div class="field">
+          <section class="step" data-step="3">
+            <div class="field">
             <h3>What skills are most important for this role?</h3>
             <div class="choice-grid">
               <label class="choice"><input type="checkbox" name="skills" value="Excel"> Excel</label>
@@ -317,13 +365,20 @@
               <label class="choice"><input type="checkbox" name="skills" value="Research"> Research</label>
               <label class="choice"><input type="checkbox" name="skills" value="Presentation skills"> Presentation skills</label>
             </div>
-          </div>
+            </div>
+          </section>
 
-          <div class="field input-grid">
+          <section class="step" data-step="4">
+            <div class="field">
             <div class="full">
               <h3>What majors or fields of study do you prefer?</h3>
               <input class="demo-input" id="majors" type="text" placeholder="Business, Finance, Computer Science, Engineering" required>
             </div>
+            </div>
+          </section>
+
+          <section class="step" data-step="5">
+            <div class="field input-grid">
             <div>
               <h3>What experience level are you looking for?</h3>
               <select class="demo-select" id="experience" required>
@@ -344,14 +399,23 @@
                 <label class="choice"><input type="radio" name="priority" value="Culture fit"> Culture fit</label>
               </div>
             </div>
+            </div>
+          </section>
+
+          <section class="step" data-step="6">
+            <div class="field">
             <div class="full">
               <h3>Describe your ideal candidate</h3>
               <textarea class="demo-textarea" id="ideal" required></textarea>
             </div>
-          </div>
+            </div>
+          </section>
 
           <div class="actions">
-            <button type="submit" class="btn primary">Find My Candidates</button>
+            <button type="button" class="btn" id="prevBtn">Back</button>
+            <span class="spacer"></span>
+            <button type="button" class="btn primary" id="nextBtn">Next</button>
+            <button type="submit" class="btn primary" id="submitBtn" style="display:none;">Find My Candidates</button>
           </div>
         </form>
 
@@ -401,9 +465,46 @@
     const techCard = document.getElementById("techCard");
     const softCard = document.getElementById("softCard");
     const candidatesWrap = document.getElementById("candidates");
+    const steps = Array.from(document.querySelectorAll(".step"));
+    const stepLabel = document.getElementById("stepLabel");
+    const progressFill = document.getElementById("progressFill");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    let currentStep = 0;
 
     function getSkills() {
       return Array.from(document.querySelectorAll('input[name="skills"]:checked')).map((el) => el.value);
+    }
+
+    function validateCurrentStep() {
+      if (currentStep === 0) return document.getElementById("companyName").value.trim().length > 0;
+      if (currentStep === 1) {
+        const roleType = document.getElementById("roleType").value;
+        const term = document.getElementById("term").value;
+        const positions = document.getElementById("positions").value.trim();
+        return Boolean(roleType && term && positions);
+      }
+      if (currentStep === 2) return getSkills().length > 0;
+      if (currentStep === 3) return document.getElementById("majors").value.trim().length > 0;
+      if (currentStep === 4) {
+        const experience = document.getElementById("experience").value;
+        const priority = document.querySelector('input[name="priority"]:checked')?.value || "";
+        return Boolean(experience && priority);
+      }
+      if (currentStep === 5) return document.getElementById("ideal").value.trim().length > 0;
+      return true;
+    }
+
+    function renderStep() {
+      const total = steps.length;
+      steps.forEach((step, index) => step.classList.toggle("active", index === currentStep));
+      stepLabel.textContent = `Step ${currentStep + 1} of ${total}`;
+      progressFill.style.width = `${((currentStep + 1) / total) * 100}%`;
+      prevBtn.style.visibility = currentStep === 0 ? "hidden" : "visible";
+      const isLast = currentStep === total - 1;
+      nextBtn.style.display = isLast ? "none" : "inline-block";
+      submitBtn.style.display = isLast ? "inline-block" : "none";
     }
 
     function isTechnicalProfile(data) {
@@ -438,8 +539,33 @@
       `).join("");
     }
 
+    prevBtn.addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep -= 1;
+        renderStep();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (!validateCurrentStep()) {
+        form.reportValidity();
+        if (currentStep === 2 && getSkills().length === 0) {
+          alert("Please select at least one skill.");
+        }
+        return;
+      }
+      if (currentStep < steps.length - 1) {
+        currentStep += 1;
+        renderStep();
+      }
+    });
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+      if (!validateCurrentStep()) {
+        form.reportValidity();
+        return;
+      }
       if (!form.reportValidity()) return;
 
       const data = {
@@ -475,6 +601,7 @@
         results.classList.add("active");
       }, 2200);
     });
+    renderStep();
   </script>
 </body>
 </html>
